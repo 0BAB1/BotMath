@@ -10,33 +10,42 @@ module.exports.run = async (bot, msg, args) =>{
     {
         for(let i in bot.cours){
             stringCour = bot.cours[i].contenu.join().replace(/,/g, " "); // traitement pour avoir une belle string a afficher
-            if(!(bot.cours[i].guild != guildId)) coursArray.push(stringCour); //on fait un tbleau dans le quel se trouve les cours du serv dans lequel a été envoyé la commande.
+            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id) coursArray.push(stringCour); //on fait un tbleau dans le quel se trouve les cours du serv dans lequel a été envoyé la commande.
         }
 
-        msg.channel.send(coursArray[coursArray.length - 1]);
+        if(coursArray.length > 0) msg.channel.send(coursArray[coursArray.length - 1]);
         return;
     }
     else if(!args[1])
     {
-        return msg.channel.send("precisez qq chose ! !SI help pour + d'infos");
+        for(let i in bot.cours){
+            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id) 
+            {
+                stringCour = bot.cours[i].contenu.join().replace(/,/g, " "); // traitement pour avoir une belle string a afficher
+                msg.channel.send(`*${stringCour}* ||| **nom du cours** : ${bot.cours[i].nom}`)
+            }
+        }
     }
     else
     {
-        let delay = parseInt(args[1]);
+        let nomAffiche = args[1];
         
         for(let i in bot.cours){
             stringCour = bot.cours[i].contenu.join().replace(/,/g, " "); // traitement pour avoir une belle string a afficher
-            if(!(bot.cours[i].guild != guildId)) coursArray.push(stringCour); //on fait un tbleau dans le quel se trouve les cours du serv dans lequel a été envoyé la commande.
+            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id && bot.cours[i].nom == nomAffiche) coursArray.push(stringCour); //on fait un tbleau dans le quel se trouve les cours du serv dans lequel a été envoyé la commande.
         }
-        
-        if(delay >= coursArray.length) return msg.channel.send("on a pas eu autant de cours !");
 
-        msg.channel.send(coursArray[coursArray.length - delay]);
+        if(coursArray.length > 0) {
+            msg.channel.send(coursArray);
+        }
+        else{
+            msg.channel.send(`pas de cours nommé ${nomAffiche}`);
+        }
         return;
     }
 }
 
 module.exports.help = {
     name: "dumpCours",
-    desc: "`!SI dumpCours last: affiche le dernier cours \n!SI dumpCours <1 => > ce que vous voulez>:\naffiche le cours d'il y a ... jours`"
+    desc: "`!math dumpCours last: affiche le dernier cours \n!math dumpCours <nom> ce que vous voulez>:\naffiche le cours\n!math dumpCours pour afficher tout les cours (tous..)`"
 }

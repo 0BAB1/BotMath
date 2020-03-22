@@ -8,7 +8,8 @@ module.exports.run = async (bot, msg, args) => {
             .setThumbnail("https://lambda.sx/Elp.gif")
             .setFooter("contacter @hugo BABIN TS4 pour + d'infos")
             bot.commands.forEach(cmd => {//pour chaque commande dans le collection du bot
-                embed.addField(`!SI ${cmd.help.name}`,`${cmd.help.desc}`) //on ajoute un field avec les infos de module.exports.help
+                embed.addField(`${cmd.help.desc}`,`!math ${cmd.help.name}`); //on ajoute un field avec les infos de module.exports.help
+                embed.addField("--------------","--------------"); //separateur
             });
         
         msg.channel.send(embed);

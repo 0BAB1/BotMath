@@ -10,6 +10,6 @@ module.exports.run = async (bot, msg, args) => {
 }
 
 module.exports.help = {
-    name: "userinfo",
+    name: "avatar",
     desc: "`affiche ton avatar.. en grand ...`"
 }

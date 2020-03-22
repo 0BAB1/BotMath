@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) => {
-    if(!msg.member.hasPermission("MANAGE_MESSAGES") || !msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("tu n'as pas la premission");
+    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("pas la permission !");
 
     let toUnmute = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[1]));
     if(!toUnmute) return msg.channel.send("metionnez qqun ou donnez son id");
@@ -65,5 +65,5 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.help = {
     name: "unmute",
-    desc: "`pour unmute , !SI unmute <mention>`"
+    desc: "`pour unmute , !math unmute <mention>`"
 }

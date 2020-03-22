@@ -2,10 +2,9 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
+    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("pas la permission !");
 
-    if(!msg.member.hasPermission("MANAGE_MESSAGES") || !msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("tu n'as pas la premission"); //s'il a les perm
-
-    let toMute = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[1])); //on defini le profil du gars a mute
+    let toMute = msg.guild.member(msg.mentions.users.first() || msg.guild.members.cache.get(args[1]));
     if(!toMute) return msg.channel.send("il faut mentionner qqun ou donner son id"); // si il n'existe pas
 
     let role = msg.guild.roles.cache.find(r => r.name === "Wasted"); // on defini le role
@@ -50,13 +49,13 @@ module.exports.run = async (bot, msg, args) =>{
 
         fs.writeFile("./mutes.json", JSON.stringify(bot.mutes, null, 4), err =>{
             if(err) throw err;
-            msg.channel.send(`muté pour ${args[2]} secondes`);
+            msg.channel.send(`<@${toMute.id}> reduit au silence pour ${args[2]} secondes`);
             console.log(`${toMute.user.tag} => mute pour ${args[2]} secondes => par ${msg.author.username}`);
         }); //on update le fichier
     }
     else //s'il ya pas de temps, le mute sans laisser de traces, c'est aux modo de gerer le reste
     {
-        msg.channel.send("muté pour une duré indeterminée pensez a le unmute !");
+        msg.channel.send(`<@${toMute.id}> reduit au silence pour une duré indeterminée pensez a le unmute !`);
         console.log(`${toMute.user.tag} => mute => par ${msg.author.username}`);
     }
 
@@ -72,5 +71,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "mute",
-    desc: "`pour mute qqun, !si mute <mention> <temps en s (optionel)>`"
+    desc: "`pour mute qqun, !math mute <mention> <temps en s (optionel)>`"
 }
