@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
-    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("pas la permission !");
+    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("Vous n'avez pas la permission d'effectuer cette action !");
 
     if(args[1] && args[2])
     {
@@ -13,29 +13,29 @@ module.exports.run = async (bot, msg, args) =>{
         {
             if(bot.cours[i].nom == args[1] && bot.cours[i].channel == msg.channel.id){
                 args[1] = `${args[1]}-2`;
-                msg.channel.send(`nom déja utilisé, j'ai modifier le nom en : ${args[1]}`);
+                msg.channel.send(`Nom déja utilisé, j'ai modifié le nom en : ${args[1]}`);
             };
         }
 
-        bot.cours[timeId] = { //on utilise le temps pour donner un Id a notre cours, de plus, on pourras les trier par ordre chrono dans dumpCours.js
-            guild: msg.guild.id, //pour gerer plusieurs servers
+        bot.cours[timeId] = { //on utilise le temps pour donner un Id à notre cours, de plus, on pourra les trier par ordre chrono dans dumpCours.js
+            guild: msg.guild.id, //pour gérer plusieurs servers
             contenu: content,
             nom: args[1],
-            channel: msg.channel.id //on utilise le channel id , propre a chaque classe
-        }; //on defini le contenu du cours
+            channel: msg.channel.id //on utilise le channel id, propre à chaque classe
+        }; //on definit le contenu du cours
 
         fs.writeFile("./cours/last.json", JSON.stringify(bot.cours, null, 4), err =>{ //on l'ecrit dans le .json
             if(err) throw err;
-            msg.channel.send(` \`${content.join().replace(/,/g, " ")}\`  => a été définis comme contenu du dernier cours, sous le nom de ${args[1]}`);
+            msg.channel.send(`\`${content.join().replace(/,/g, " ")}\` : a été défini comme contenu du dernier cours, sous le nom de ${args[1]}`);
         });
     }
     else
     {
-        msg.channel.send("veuillez bien tou preciser (!SI help pour + d'infos");
+        msg.channel.send("Veuillez bien tout préciser (\"!math help\" pour plus d'infos) !");
     }
 }
 
 module.exports.help = {
     name: "addCours",
-    desc: "`=> ajouter un cours:\n!math addCours <nom> <exp 8.3 vu | exo 2 | etc>\ngardez un nom simple pour le modifier/supprimer\nce même cours ne serra accessible que par le channel ou il a été envoyé\npour separer les differentes classes`"
+    desc: "`Pour ajouter un cours :\n!math addCours <nom> <contenu du cours>\nGardez un nom simple, sans espace.\nCe cours ne serra accessible que depuis le salon ou il a été envoyé.`"
 }
