@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 const bot = new Discord.Client();
-botConfig = require("./config.json")
+bot.botConfig = require("./config.json");
 bot.commands = new Discord.Collection();
 bot.mutes = require("./mutes.json");
 bot.cours = require("./cours/last.json");
@@ -39,7 +39,7 @@ bot.on("ready", async () => {
     //=========présence discord==========//
     //===================================//
 
-    bot.user.setActivity(' => !SI help', {type : 'WATCHING'});
+    bot.user.setActivity(' => !math help', {type : 'WATCHING'});
 
     //===================================//
     //======génération lien invite=======//
@@ -52,7 +52,6 @@ bot.on("ready", async () => {
     {
         console.log(e.stack);
     }
-    console.log(bot.commands);
     console.log(`${bot.user.username} est pret !`);
 
     //===================================//
@@ -93,11 +92,11 @@ bot.on("message", async msg => {
     let command = messageArray[0];
     let args = messageArray.slice(1); // va supprimer la commande (prefixe) de l'array car deja dans "commande"
 
-    if(!command.startsWith(botConfig.prefix)) return;
+    if(!command.startsWith(bot.botConfig.prefix)) return;
 
     let cmd = bot.commands.get(args[0]);
     if(cmd) cmd.run(bot,msg,args);
 });
 
 //bot login:
-bot.login(botConfig.token);
+bot.login(bot.botConfig.token);
