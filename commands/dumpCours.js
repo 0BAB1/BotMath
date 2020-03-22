@@ -5,6 +5,10 @@ module.exports.run = async (bot, msg, args) =>{
     let guildId = msg.guild.id;
     let coursArray = new Array;
     let stringCour = new String;
+
+    //===================================//
+    //=====afficher le dernier cours=====//
+    //===================================//
     
     if(args[1] === "last")
     {
@@ -26,6 +30,9 @@ module.exports.run = async (bot, msg, args) =>{
             }
         }
     }
+    //===================================//
+    //===========tout afficher===========//
+    //===================================//
     else
     {
         let nomAffiche = args[1];

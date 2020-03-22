@@ -4,7 +4,7 @@ const fs = require("fs");
 module.exports.run = async (bot, msg, args) =>{
     if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("Vous n'avez pas la permission d'effectuer cette action !");
 
-    if(args[1] && args[2])
+    if(args[1] && args[2])//si tout les arguments on été précisés, n peut traiter la demande
     {
         let content = args.splice(2, args.length - 1);
         let k = 0; //un iterateur
@@ -20,7 +20,7 @@ module.exports.run = async (bot, msg, args) =>{
                     channel: msg.channel.id
                 };
 
-                await fs.writeFile("./cours/last.json", JSON.stringify(bot.cours, null, 4), err =>{ //on les sauvegarde
+                fs.writeFile("./cours/last.json", JSON.stringify(bot.cours, null, 4), err =>{ //on les sauvegarde
                     if(err) throw err;
                 
                     msg.channel.send(`Nouveau contenu du cours du **${bot.cours[i].nom}** : \`${content.join().replace(/,/g, " ")}\``);

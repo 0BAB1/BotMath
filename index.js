@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js');//test
 const fs = require("fs");
 
 const bot = new Discord.Client();
@@ -6,6 +6,7 @@ bot.botConfig = require("./config.json");
 bot.commands = new Discord.Collection();
 bot.mutes = require("./mutes.json");
 bot.cours = require("./cours/last.json");
+bot.devoirs = require("./cours/devoirs.json");
 
 //=============================================================================================//
 //===========================initialisation de la collection de commandes======================//

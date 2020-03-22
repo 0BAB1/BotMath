@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports.run = async (bot, msg, args) => {
+    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("Vous n'avez pas la permission d'effectuer cette action !");
     if(!args[1]){
         let embed = new Discord.MessageEmbed()
             .setTitle("help sur les commandes")
