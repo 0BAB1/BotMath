@@ -26,7 +26,11 @@ module.exports.run = async (bot, msg, args) =>{
 
         fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on l'ecrit dans le .json
             if(err) throw err;
+<<<<<<< HEAD
             msg.channel.send(`*${content.join(" ")}* : a été défini comme contenu du dernier cours, sous le nom de **${args[1]}**`);
+=======
+            msg.channel.send(`*${content.join().replace(/,/g, " ")}* : a été défini comme contenu du dernier cours, sous le nom de **${args[1]}**`);
+>>>>>>> 6f68b8fb08d3fa547c462496fd0186fb83e7d05f
         });
     }
     else
