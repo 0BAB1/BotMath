@@ -34,7 +34,8 @@ module.exports.run = async (bot, msg, args) =>{
         } 
     }
 
-    if(toMute.roles.cache.has(role.id)) return msg.channel.send("cet utilisateur est deja mute !"); //si le mec est deja mute, on arrete
+    if(toMute.roles.cache.has(role.id) && args[2]) return msg.channel.send("cet utilisateur est deja mute !"); //si le mec est deja mute, on arrete
+    //on check aussi s'il donne du temps sinon on check pour l'ecrasement
 
     //===================================//
     //=========appliquer le mute=========//
@@ -55,8 +56,23 @@ module.exports.run = async (bot, msg, args) =>{
     }
     else //s'il ya pas de temps, le mute sans laisser de traces, c'est aux modo de gerer le reste
     {
-        msg.channel.send(`<@${toMute.id}> reduit au silence pour une duré indeterminée pensez a le unmute !`);
-        console.log(`${toMute.user.tag} => mute => par ${msg.author.username}`);
+        if(toMute.roles.cache.has(role.id))
+        {
+            if(!bot.mutes[toMute.id]) return msg.channel.send("deja permaMute ..");
+
+            delete bot.mutes[toMute.id];
+
+            fs.writeFile("./mutes.json", JSON.stringify(bot.mutes, null, 4), err =>{
+                if(err) throw err;
+                msg.channel.send(`<@${toMute.id}> purges desormais sa peine jusqu'a nouvel ordre !`);
+                console.log(`${toMute.user.tag} => mute depuis timed to perma par ${msg.author.username}`);
+            });
+        }
+        else
+        {
+            msg.channel.send(`<@${toMute.id}> reduit au silence pour une duré indeterminée pensez a le unmute !`);
+            console.log(`${toMute.user.tag} => mute => par ${msg.author.username}`);
+        }
     }
 
     try{
