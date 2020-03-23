@@ -11,7 +11,7 @@ module.exports.run = async (bot, msg, args) =>{
 
         for(i in bot.devoirs)
         {
-            if(bot.devoirs[i].nom == args[1] && bot.devoirs[i].guild == msg.guild.id)
+            if(bot.devoirs[i].nom == args[1] && bot.devoirs[i].guild == msg.guild.id && bot.devoirs[i].channel == msg.channel.id)
             {
                 bot.devoirs[i] = { //on écrase les données
                     guild: msg.guild.id,

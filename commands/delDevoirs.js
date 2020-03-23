@@ -44,7 +44,10 @@ module.exports.run = async (bot, msg, args) =>{
     {
         for(let i in bot.devoirs)
         {
-            delete bot.devoirs[i]; //on efface a chaque iteration, on efface TOUT
+            if(msg.channel.id == bot.devoirs[i].channel && bot.devoirs[i].guild == msg.guild.id)//seulement ceux du serv est du channel en question quand meme !
+            {
+                delete bot.devoirs[i]; //on efface a chaque iteration, on efface TOUT
+            }
         }
 
         fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on sauvegarde

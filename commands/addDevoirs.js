@@ -11,7 +11,7 @@ module.exports.run = async (bot, msg, args) =>{
 
         for(let i in bot.devoirs)
         {
-            if(bot.devoirs[i].nom == args[1] && bot.devoirs[i].channel == msg.channel.id){
+            if(bot.devoirs[i].nom == args[1] && bot.devoirs[i].channel == msg.channel.id && bot.devoirs[i].guild == msg.guild.id){
                 args[1] = `${args[1]}-2`;
                 msg.channel.send(`Nom déja utilisé, j'ai modifié le nom en : ${args[1]}`);
             };
@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg, args) =>{
 
         fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on l'ecrit dans le .json
             if(err) throw err;
-            msg.channel.send(`\`${content.join().replace(/,/g, " ")}\` : a été défini comme contenu du dernier cours, sous le nom de ${args[1]}`);
+            msg.channel.send(`*${content.join(" ")}* : a été défini comme contenu du dernier cours, sous le nom de **${args[1]}**`);
         });
     }
     else
@@ -36,6 +36,6 @@ module.exports.run = async (bot, msg, args) =>{
 }
 
 module.exports.help = {
-    name: "addDevoirs",
-    desc: "`Pour ajouter un devoir :\n!math adddevoir <nom (pour le)> <contenu du devoir>\nGardez un nom simple, sans espace.\nCe cours ne serra accessible que depuis le salon ou il a été envoyé.`"
+    name: "addDevoir",
+    desc: "`Pour ajouter un devoir :\n!math addDevoir <date (pour le)> <contenu du devoir>\nGardez une date simple, sans espace.\nCe devoir ne serra accessible que depuis le salon ou il a été envoyé.`"
 }

@@ -13,7 +13,7 @@ module.exports.run = async (bot, msg, args) =>{
     if(args[1] === "last")
     {
         for(let i in bot.devoirs){
-            stringDevoir = bot.devoirs[i].contenu.join().replace(/,/g, " "); // traitement pour avoir une belle string a afficher
+            stringDevoir = bot.devoirs[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
             if(bot.devoirs[i].guild == guildId && bot.devoirs[i].channel == msg.channel.id) devoirsArray.push(stringDevoir);var nom = bot.devoirs[i].nom; //on fait un tableau dans lequel se trouvent les cours du salon dans lequel a été envoyé la commande.
         }//le petit var nom prend la valeur du nom du dernier devoir pour l'affcher ensuite, pas tres opti comme partie, a refaire eventuellement
 
@@ -26,7 +26,7 @@ module.exports.run = async (bot, msg, args) =>{
         for(let i in bot.devoirs){
             if(bot.devoirs[i].guild == guildId && bot.devoirs[i].channel == msg.channel.id) 
             {
-                stringDevoir = bot.devoirs[i].contenu.join().replace(/,/g, " "); // traitement pour avoir une belle string a afficher
+                stringDevoir = bot.devoirs[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
                 msg.channel.send(`Devoirs pour le **${bot.devoirs[i].nom}** : *${stringDevoir}*`)
             }
         }
@@ -43,7 +43,7 @@ module.exports.run = async (bot, msg, args) =>{
         let stringDevoir = new String;
         
         for(let i in bot.devoirs){
-            stringDevoir = bot.devoirs[i].contenu.join().replace(/,/g, " "); // traitement pour avoir une belle string a afficher
+            stringDevoir = bot.devoirs[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
             if(bot.devoirs[i].guild == guildId && bot.devoirs[i].channel == msg.channel.id && bot.devoirs[i].nom == nomAffiche) devoirsArray.push(stringDevoir); //on fait un tableau dans lequel se trouvent les cours du salon dans lequel a été envoyé la commande.
         }
 

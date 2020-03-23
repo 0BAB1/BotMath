@@ -13,7 +13,7 @@ module.exports.run = async (bot, msg, args) =>{
     if(args[1] === "last")
     {
         for(let i in bot.cours){
-            stringCour = bot.cours[i].contenu.join().replace(/,/g, " "); // traitement pour avoir une belle string a afficher
+            stringCour = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
             if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id) coursArray.push(stringCour); //on fait un tableau dans lequel se trouvent les cours du salon dans lequel a été envoyé la commande.
         }
 
@@ -23,9 +23,9 @@ module.exports.run = async (bot, msg, args) =>{
     else if(!args[1])
     {
         for(let i in bot.cours){
-            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id) 
+            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id && bot.cours[i].guild == msg.guild.id) 
             {
-                stringCour = bot.cours[i].contenu.join().replace(/,/g, " "); // traitement pour avoir une belle string a afficher
+                stringCour = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
                 msg.channel.send(`Cours du **${bot.cours[i].nom}** : *${stringCour}*`)
             }
         }
@@ -38,7 +38,7 @@ module.exports.run = async (bot, msg, args) =>{
         let nomAffiche = args[1];
         
         for(let i in bot.cours){
-            stringCour = bot.cours[i].contenu.join().replace(/,/g, " "); // traitement pour avoir une belle string a afficher
+            stringCour = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
             if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id && bot.cours[i].nom == nomAffiche) coursArray.push(stringCour); //on fait un tableau dans lequel se trouvent les cours du salon dans lequel a été envoyé la commande.
         }
 
@@ -46,7 +46,7 @@ module.exports.run = async (bot, msg, args) =>{
             msg.channel.send(coursArray);
         }
         else{
-            msg.channel.send(`Aucun cours nommé ${nomAffiche}`);
+            msg.channel.send(`Aucun cours nommé **${nomAffiche}**`);
         }
         return;
     }
@@ -54,5 +54,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "dumpCours",
-    desc: "`!math dumpCours last : affiche le dernier cours\n!math dumpCours <nom> : affiche le cours nommé\n!math dumpCours : affiche tous les cours`"
+    desc: "`Pour afficher un cours.!math dumpCours last : affiche le dernier cours.\n!math dumpCours <nom> : affiche le cours nommé.\n!math dumpCours : affiche tous les cours.`"
 }
