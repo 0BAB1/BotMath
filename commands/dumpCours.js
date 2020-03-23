@@ -46,7 +46,7 @@ module.exports.run = async (bot, msg, args) =>{
             msg.channel.send(coursArray);
         }
         else{
-            msg.channel.send(`Aucun cours nommé ${nomAffiche}`);
+            msg.channel.send(`Aucun cours nommé **${nomAffiche}**`);
         }
         return;
     }
@@ -54,5 +54,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "dumpCours",
-    desc: "`!math dumpCours last : affiche le dernier cours\n!math dumpCours <nom> : affiche le cours nommé\n!math dumpCours : affiche tous les cours`"
+    desc: "`Pour afficher un cours.!math dumpCours last : affiche le dernier cours.\n!math dumpCours <nom> : affiche le cours nommé.\n!math dumpCours : affiche tous les cours.`"
 }
