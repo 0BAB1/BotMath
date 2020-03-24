@@ -30,3 +30,12 @@ un message de confirmation comme quoi le bot est pr^et s'affiche alors
 
 creez un nouvelle commande dans /commands/nomCommande.js, tout autre requete sera refusée et votre commande a ajouter doit etre UTILE !!
 
+## Le config.json
+pour des raison évidentes, le config.json ne figure pas dans ce dépot, voici a quoi le votre doir ressembler : 
+```json
+{
+    "token" : "votre token",
+    "prefix" : "!math"
+}
+```
+
