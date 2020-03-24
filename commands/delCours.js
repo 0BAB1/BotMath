@@ -69,5 +69,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "delCours",
-    desc: "`Pour supprimer un cours.\nEx : !math delCours <nom> (supprime le cours nommé)\nEx : !math delCours all (supprime tous les cours)`"
+    desc: "`Permet de supprimer un cours.\nEx : !math delCours <nom> (supprime le cours nommé)\nEx : !math delCours all (supprime tous les cours)`"
 }
