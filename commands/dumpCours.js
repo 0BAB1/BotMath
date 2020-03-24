@@ -68,5 +68,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "dumpCours",
-    desc: "`Pour afficher un ou des cours.\n!math dumpCours last : affiche le dernier cours.\n!math dumpCours <nom> : affiche le cours nommé.\n!math dumpCours : affiche tous les cours.`"
+    desc: "`Permet d'afficher un ou des cours.\nEx : !math dumpCours last (affiche le dernier cours)\nEx : !math dumpCours <nom> (affiche le cours nommé)\nEx : !math dumpCours (affiche tous les cours)`"
 }
