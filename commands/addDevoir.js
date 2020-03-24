@@ -47,5 +47,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "addDevoir",
-    desc: "`Permet d'ajouter un devoir.\nEx : !math addDevoir <date (pour le)> <contenu du devoir>\nGardez une date simple, sans espace.\nCe devoir ne serra accessible que depuis le salon ou il a été envoyé.`"
+    desc: "`Permet d'ajouter un devoir.\nEx : !math addDevoir <date> <contenu du devoir>\nGardez une date simple, sans espace.\nCe devoir ne serra accessible que depuis le salon ou il a été envoyé.`"
 }
