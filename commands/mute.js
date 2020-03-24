@@ -87,5 +87,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "mute",
-    desc: "`pour mute qqun, !math mute <mention> <temps en s (optionel)>`"
+    desc: "`Permet de réduire quelqu'un au silence.\nEx : !math mute <mention> <temps en s (optionel)>`"
 }
