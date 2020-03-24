@@ -4,16 +4,16 @@ const fs = require("fs");
 module.exports.run = async (bot, msg, args) => {
     if(!args[1]){
         let embed = new Discord.MessageEmbed()
-            .setTitle("Les horraires de cours.")
+            .setTitle("Les horaires de cours")
             .setColor('#4bff5b')
             .setThumbnail("https://lambda.sx/DMY.png")
-            .setFooter("Pour plus d'informations, contacter les professeurs")
-            .addField("lundi", `${bot.horaires.lundi}`)//on affiche a partir de bot.horaires
-            .addField("mardi", `${bot.horaires.mardi}`)
-            .addField("mercredi", `${bot.horaires.mercredi}`)
-            .addField("jeudi", `${bot.horaires.jeudi}`)
-            .addField("vendredi", `${bot.horaires.vendredi}`)
-            .addField("et sutout", "soyez a l'heure !")
+            .setFooter("Pour plus d'informations, contacter les professeurs.")
+            .addField("Lundi :", `${bot.horaires.lundi}`)//on affiche a partir de bot.horaires
+            .addField("Mardi :", `${bot.horaires.mardi}`)
+            .addField("Mercredi :", `${bot.horaires.mercredi}`)
+            .addField("Jeudi :", `${bot.horaires.jeudi}`)
+            .addField("Vendredi :", `${bot.horaires.vendredi}`)
+            .addField("Et sutout :", "Soyez à l'heure !")
         
         msg.channel.send(embed);
     }
