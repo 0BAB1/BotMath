@@ -4,46 +4,60 @@ const fs = require("fs");
 module.exports.run = async (bot, msg, args) =>{
     let guildId = msg.guild.id;
     let coursArray = new Array;
-    let stringCour = new String;
+    let stringCours = new String;
+    let k = new String;
+    let allCours = new String;
 
     //===================================//
     //=====afficher le dernier cours=====//
     //===================================//
-    
     if(args[1] === "last")
     {
         for(let i in bot.cours){
-            stringCour = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
-            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id) coursArray.push(stringCour); //on fait un tableau dans lequel se trouvent les cours du salon dans lequel a été envoyé la commande.
+            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id) {
+                stringCours = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
+                k = i; //on sauvegarde l'id du dernier cours trouvé
+            }
         }
 
-        if(coursArray.length > 0) msg.channel.send(coursArray[coursArray.length - 1]);
+        if(stringCours.length > 0) {
+            msg.channel.send(`Cours du **${bot.cours[k].nom}** : *${stringCours}*`);
+        } else {
+            msg.channel.send(`Aucune entrée n'a encore été saisie !`); //pour insulter l'utilisateur
+        }
         return;
     }
+    //===================================//
+    //===========tout afficher===========//
+    //===================================//
     else if(!args[1])
     {
         for(let i in bot.cours){
             if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id && bot.cours[i].guild == msg.guild.id) 
             {
-                stringCour = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
-                msg.channel.send(`Cours du **${bot.cours[i].nom}** : *${stringCour}*`)
+                stringCours = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
+                allCours += `Cours du **${bot.cours[i].nom}** : *${stringCours}*` + "\n"; //on concatène tous les cours
             }
         }
+        msg.channel.send(allCours); //on affiche en une seule fois pour éviter de multiples alertes
     }
     //===================================//
-    //===========tout afficher===========//
+    //======afficher le cours voulu======//
     //===================================//
     else
     {
         let nomAffiche = args[1];
         
         for(let i in bot.cours){
-            stringCour = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
-            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id && bot.cours[i].nom == nomAffiche) coursArray.push(stringCour); //on fait un tableau dans lequel se trouvent les cours du salon dans lequel a été envoyé la commande.
+            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id && bot.cours[i].nom == nomAffiche) {
+                stringCours = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
+                k = i; //on sauvegarde l'id du cours trouvé
+                break; //pas la peine de continuer à chercher une entrée, on l'a déjà trouvée
+            }
         }
 
-        if(coursArray.length > 0) {
-            msg.channel.send(coursArray);
+        if(stringCours.length > 0) {
+            msg.channel.send(`Cours du **${bot.cours[k].nom}** : *${stringCours}*`);
         }
         else{
             msg.channel.send(`Aucun cours nommé **${nomAffiche}**`);
@@ -54,5 +68,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "dumpCours",
-    desc: "`Pour afficher un cours.!math dumpCours last : affiche le dernier cours.\n!math dumpCours <nom> : affiche le cours nommé.\n!math dumpCours : affiche tous les cours.`"
+    desc: "`Pour afficher un ou des cours.\n!math dumpCours last : affiche le dernier cours.\n!math dumpCours <nom> : affiche le cours nommé.\n!math dumpCours : affiche tous les cours.`"
 }
