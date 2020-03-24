@@ -8,7 +8,7 @@ module.exports.run = async (bot, msg, args) => {
             .setColor('#4bff5b')
             .setThumbnail("https://lambda.sx/DMY.png")
             .setFooter("Pour plus d'informations, contacter les professeurs")
-            .addField("lundi", `${bot.horaires.lundi}`)//on affiche a partir de bot.horraires
+            .addField("lundi", `${bot.horaires.lundi}`)//on affiche a partir de bot.horaires
             .addField("mardi", `${bot.horaires.mardi}`)
             .addField("mercredi", `${bot.horaires.mercredi}`)
             .addField("jeudi", `${bot.horaires.jeudi}`)
@@ -31,11 +31,11 @@ module.exports.run = async (bot, msg, args) => {
             return;
         }
 
-        if(!args[2]) return msg.channel.send('renseignez un nouvel horraire svp'); // si il ny a pas de nouvel horraire de précisé
+        if(!args[2]) return msg.channel.send('Renseignez un nouvel horaire'); // si il ny a pas de nouvel horraire de précisé
 
         let k = false;
 
-        for(let i in bot.horaires){ //ici i va prendre les valeur des jours de la semaine , cf horaires.json
+        for(let i in bot.horaires){ //ici i va prendre les valeur des jours de la semaine, cf horaires.json
             if(i == args[1]){
                 k = true; //on met k a true pour voir si on a bien trouver un horraire a modifier
                 let newHoraires = args.splice(2, args.length - 1).join(" "); //on prend tout les argument du 3 eme au dernier C.A.D les nouveaux horraires  
@@ -54,5 +54,5 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.help = {
     name: "horaires",
-    desc: "` \`!math horaires\` Affiches les horaires des cours\n\`!math horaires <jour> <nouvel horraire>\`modifier des horraires`"
+    desc: "`Permet d'afficher / modifier les horaires de cours.\nEx : !math horaires (affiche tous les horaires)\nEx : !math horaires <jour> <nouvel horaire> (modifie l'horaire du jour nommé)`"
 }
