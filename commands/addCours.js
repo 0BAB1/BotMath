@@ -2,7 +2,17 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
-    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("Vous n'avez pas la permission d'effectuer cette action !");
+    if(!msg.member.hasPermission("ADMINISTRATOR")) {
+        if(msg.deletable) {
+            msg.delete({timeout:3000}); //supression du message
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action, supression du message dans 3 secondes !")
+                .then(b_msg => {b_msg.delete({timeout:3000});}); //supression de la réponse du bot
+        } else {
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action !");
+        }
+
+        return
+    }
 
     if(args[1] && args[2])
     {
@@ -24,7 +34,7 @@ module.exports.run = async (bot, msg, args) =>{
             channel: msg.channel.id //on utilise le channel id, propre à chaque classe
         }; //on definit le contenu du cours
 
-        fs.writeFile("./cours/last.json", JSON.stringify(bot.cours, null, 4), err =>{ //on l'ecrit dans le .json
+        fs.writeFile("./cours/last.json", JSON.stringify(bot.cours, null, 4), err =>{ //on l'écrit dans le .json
             if(err) throw err;
             msg.channel.send(`*${content.join(" ")}* : a été défini comme contenu du dernier cours, sous le nom de **${args[1]}**`);
         });
