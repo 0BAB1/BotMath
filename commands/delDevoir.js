@@ -2,9 +2,19 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
-    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("pas la permission !");
+    if(!msg.member.hasPermission("ADMINISTRATOR")) {
+        if(msg.deletable) {
+            msg.delete({timeout:3000}); //supression du message
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action, supression du message dans 3 secondes !")
+                .then(b_msg => {b_msg.delete({timeout:3000});}); //supression de la réponse du bot
+        } else {
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action !");
+        }
 
-    if(!args[1]) return msg.channel.send("precisez un cours"); //si il n'y a pas de nom précisé
+        return
+    }
+
+    if(!args[1]) return msg.channel.send("Précisez un cours."); //s'l n'y a pas de nom précisé
 
     let k = 0; //iterateur pour savoir si on a trouvé un fichier
 
@@ -27,12 +37,12 @@ module.exports.run = async (bot, msg, args) =>{
         {
             fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on sauvegarde
                 if(err) throw err;
-                msg.channel.send(`${args[1]} a été supprimé`);
+                msg.channel.send(`Le devoir du **${args[1]}** a été supprimé.`);
             });
         }
         else
         {
-            msg.channel.send("pas de cours trouvé portant ce nom");
+            msg.channel.send("Pas de cours trouvé portant ce nom.");
         }
     }
 
@@ -52,12 +62,12 @@ module.exports.run = async (bot, msg, args) =>{
 
         fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on sauvegarde
             if(err) throw err;
-            msg.channel.send(`tout les cours ont été supprimé`);
+            msg.channel.send(`Tous les cours ont été supprimés.`);
         });
     }
 }
 
 module.exports.help = {
     name: "delDevoir",
-    desc: "`=> supprimer un devoir a faire:\n!math delDevoirs <nom> <all> all est optionel mais ATTENTION, il va tout supprimer`"
+    desc: "`Permet de supprimer un devoir.\nEx : !math delDevoir <nom> (supprime le devoir nommé)\nEx : !math delDevoir all (supprimer tous les devoirs)`"
 }
