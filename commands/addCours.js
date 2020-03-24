@@ -47,5 +47,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "addCours",
-    desc: "`Permet d'ajouter un cours.\n!Ex : math addCours <date> <contenu du cours>\nGardez une date simple, sans espace.\nCe cours ne serra accessible que depuis le salon ou il a été envoyé.`"
+    desc: "`Permet d'ajouter un cours.\nEx : !math addCours <date> <contenu du cours>\nGardez une date simple, sans espace.\nCe cours ne serra accessible que depuis le salon ou il a été envoyé.`"
 }
