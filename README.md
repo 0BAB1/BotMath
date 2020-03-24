@@ -1,4 +1,4 @@
-# Bot √x² = |x|
+# Bot √x² = |x| formule est correcte !
 > Ce bot en javascript permet de stocker pour vous contenus de cours et dvoirs a faire sous forme de texte, afin que tout le monde puisse y acceder a tout moment!
 >il sert aussi d'outil de modération et quelques autrres fonctionalités !
 
