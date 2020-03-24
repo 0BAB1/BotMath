@@ -13,7 +13,7 @@ module.exports.run = async (bot, msg, args) => {
             .addField("Mercredi :", `${bot.horaires.mercredi}`)
             .addField("Jeudi :", `${bot.horaires.jeudi}`)
             .addField("Vendredi :", `${bot.horaires.vendredi}`)
-            .addField("Et sutout :", "Soyez à l'heure !")
+            .addField("Et surtout :", "Soyez à l'heure !")
         
         msg.channel.send(embed);
     }
