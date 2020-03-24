@@ -7,6 +7,7 @@ bot.commands = new Discord.Collection();
 bot.mutes = require("./mutes.json");
 bot.cours = require("./cours/cours.json");
 bot.devoirs = require("./cours/devoirs.json");
+bot.horaires = require("./horaires.json");
 
 //=============================================================================================//
 //===========================initialisation de la collection de commandes======================//

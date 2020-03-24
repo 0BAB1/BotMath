@@ -7,7 +7,7 @@ module.exports.run = async (bot, msg, args) => {
             .setTitle("Aide sur les commandes.")
             .setColor('#0099ff')
             .setThumbnail("https://lambda.sx/Elp.gif")
-            .setFooter("Pour plus d'informations, contacter @Hugo BABIN en TS4.")
+            .setFooter("Pour plus d'informations, contacter les developpeurs")
             bot.commands.forEach(cmd => {//pour chaque commande dans le collection du bot
                 embed.addField(`!math ${cmd.help.name}`,`${cmd.help.desc} \n ---------------------------------------------------`); //on ajoute un field avec les infos de module.exports.help + separateur
             });
