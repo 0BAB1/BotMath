@@ -34,7 +34,7 @@ module.exports.run = async (bot, msg, args) =>{
             channel: msg.channel.id //on utilise le channel id, propre à chaque classe
         }; //on definit le contenu du cours
 
-        fs.writeFile("./cours/last.json", JSON.stringify(bot.cours, null, 4), err =>{ //on l'écrit dans le .json
+        fs.writeFile("./cours/cours.json", JSON.stringify(bot.cours, null, 4), err =>{ //on l'écrit dans le .json
             if(err) throw err;
             msg.channel.send(`*${content.join(" ")}* : a été défini comme contenu du dernier cours, sous le nom de **${args[1]}**`);
         });

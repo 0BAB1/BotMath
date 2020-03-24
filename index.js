@@ -5,7 +5,7 @@ const bot = new Discord.Client();
 bot.botConfig = require("./config.json");
 bot.commands = new Discord.Collection();
 bot.mutes = require("./mutes.json");
-bot.cours = require("./cours/last.json");
+bot.cours = require("./cours/cours.json");
 bot.devoirs = require("./cours/devoirs.json");
 
 //=============================================================================================//
@@ -40,7 +40,7 @@ bot.on("ready", async () => {
     //=========présence discord==========//
     //===================================//
 
-    bot.user.setActivity(' => !math help', {type : 'WATCHING'});
+    bot.user.setActivity('Aide : salon "bot"', {type : 'WATCHING'});
 
     //===================================//
     //======génération lien invite=======//

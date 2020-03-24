@@ -2,7 +2,17 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
-    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("Vous n'avez pas la permission d'effectuer cette action !");
+    if(!msg.member.hasPermission("ADMINISTRATOR")) {
+        if(msg.deletable) {
+            msg.delete({timeout:3000}); //supression du message
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action, supression du message dans 3 secondes !")
+                .then(b_msg => {b_msg.delete({timeout:3000});}); //supression de la réponse du bot
+        } else {
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action !");
+        }
+
+        return
+    }
 
     if(args[1] && args[2])// si tout les arguments sont renseignés
     {
@@ -37,5 +47,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "addDevoir",
-    desc: "`Pour ajouter un devoir :\n!math addDevoir <date (pour le)> <contenu du devoir>\nGardez une date simple, sans espace.\nCe devoir ne serra accessible que depuis le salon ou il a été envoyé.`"
+    desc: "`Permet d'ajouter un devoir.\nEx : !math addDevoir <date (pour le)> <contenu du devoir>\nGardez une date simple, sans espace.\nCe devoir ne serra accessible que depuis le salon ou il a été envoyé.`"
 }
