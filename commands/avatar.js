@@ -1,9 +1,10 @@
 const Discord = require('discord.js');
 
 module.exports.run = async (bot, msg, args) => {
-    let message = await msg.channel.send('... génération du lien ...'); //des petis await qui ne servent pas c,'est des petits tests sympa pour faire
-    //un impression de chargement
-    //morceau de code a garder car peut servir de sample
+    let message = await msg.channel.send('... génération du lien ...');
+    //des petits await qui ne servent pas, c'est des petits tests sympas
+    //pour faire une impression de chargement...
+    //morceau de code à garder car peut servir d'exemple
 
     if(!msg.author.displayAvatarURL()) return msg.edit("erreur");
     
@@ -12,5 +13,5 @@ module.exports.run = async (bot, msg, args) => {
 
 module.exports.help = {
     name: "avatar",
-    desc: "`affiche ton avatar.. en grand ...`"
+    desc: "`Affiche ton avatar, en grand !`"
 }
