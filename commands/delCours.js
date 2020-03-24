@@ -2,7 +2,17 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
-    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("Vous n'avez pas la permission d'effectuer cette action !");
+    if(!msg.member.hasPermission("ADMINISTRATOR")) {
+        if(msg.deletable) {
+            msg.delete({timeout:3000}); //supression du message
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action, supression du message dans 3 secondes !")
+                .then(b_msg => {b_msg.delete({timeout:3000});}); //supression de la réponse du bot
+        } else {
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action !");
+        }
+
+        return
+    }
 
     if(!args[1]) return msg.channel.send("Précisez un cours !"); //s'il n'y a pas de nom précisé
 
@@ -59,5 +69,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "delCours",
-    desc: "`Pour supprimer un cours.\n!math delCours <nom> : supprime le cours nommé.\n!math delCours all : supprime tous les cours !`"
+    desc: "`Pour supprimer un cours.\nEx : !math delCours <nom> (supprime le cours nommé)\nEx : !math delCours all (supprime tous les cours)`"
 }
