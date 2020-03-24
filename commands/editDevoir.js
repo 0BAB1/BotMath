@@ -2,7 +2,17 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
-    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("Vous n'avez pas la permission d'effectuer cette action !"); //s'il a les perm
+    if(!msg.member.hasPermission("ADMINISTRATOR")) {
+        if(msg.deletable) {
+            msg.delete({timeout:3000}); //supression du message
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action, supression du message dans 3 secondes !")
+                .then(b_msg => {b_msg.delete({timeout:3000});}); //supression de la réponse du bot
+        } else {
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action !");
+        }
+
+        return
+    }
 
     if(args[1] && args[2])//si tout les arguments on été précisés, n peut traiter la demande
     {
@@ -41,5 +51,5 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "editDevoir",
-    desc: "`Pour modifier des anciens devoirs\n!math modifCours <nom> <contenu du devoir>`"
+    desc: "`Permet de modifier un devoir existant.\nEx : !math editDevoir <nom> <nouveau contenu du devoir>`"
 }
