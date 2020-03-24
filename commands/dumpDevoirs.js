@@ -21,7 +21,7 @@ module.exports.run = async (bot, msg, args) =>{
         }
 
         if(stringDevoirs.length > 0) {
-            msg.channel.send(`Devoirs du **${bot.devoirs[k].nom}** : *${stringDevoirs}*`);
+            msg.channel.send(`Devoir du **${bot.devoirs[k].nom}** : *${stringDevoirs}*`);
         } else {
             msg.channel.send(`Aucune entrée n'a encore été saisie !`); //pour insulter l'utilisateur
         }
@@ -36,7 +36,7 @@ module.exports.run = async (bot, msg, args) =>{
             if(bot.devoirs[i].guild == guildId && bot.devoirs[i].channel == msg.channel.id && bot.devoirs[i].guild == msg.guild.id) 
             {
                 stringDevoirs = bot.devoirs[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
-                allDevoirs += `Devoirs du **${bot.devoirs[i].nom}** : *${stringDevoirs}*` + "\n"; //on concatène tous les cours
+                allDevoirs += `Devoir du **${bot.devoirs[i].nom}** : *${stringDevoirs}*` + "\n"; //on concatène tous les cours
             }
         }
         msg.channel.send(allDevoirs); //on affiche en une seule fois pour éviter de multiples alertes
@@ -67,6 +67,6 @@ module.exports.run = async (bot, msg, args) =>{
 }
 
 module.exports.help = {
-    name: "dumpDevoirs",
-    desc: "`Pour afficher un ou des des devoirs.\n!math dumpDevoirs last : affiche le dernier devoir a faire.\n!math dumpDevoirs <nom> : affiche le devoir nommé.\n!math dumpDevoirs : affiche tous les devoirs.`"
+    name: "dumpDevoir",
+    desc: "`Pemmet d'afficher un ou des des devoirs.\nEx : !math dumpDevoir last (affiche le dernier devoir).\nEx : !math dumpDevoir <nom> (affiche le devoir nommé)\nEx : !math dumpDevoir (affiche tous les devoirs)`"
 }
