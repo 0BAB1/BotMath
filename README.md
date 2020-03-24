@@ -6,7 +6,7 @@
 
 le bot peut accompagner les élèves et les proffesseurs dans leur organisation en évitant certains de toujours soliciter leurs camarades pour les contenus des
 cours et des devoirs, il peut aussi arreter les causeurs de troubles sur commande pour avoir de l'aide dans discord tapez tout simplement:
->!math help !
+>!math help
 
 ## Installation des dépendances
 
