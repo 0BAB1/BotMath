@@ -14,13 +14,13 @@ module.exports.run = async (bot, msg, args) =>{
     if(args[1] === "last")
     {
         for(let i in bot.devoirs){
-            if(bot.devoirs[i].guild == guildId && bot.devoirss[i].channel == msg.channel.id) {
+            if(bot.devoirs[i].guild == guildId && bot.devoirs[i].channel == msg.channel.id) {
                 stringDevoirs = bot.devoirs[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
                 k = i; //on sauvegarde l'id du dernier cours trouvé
             }
         }
 
-        if(stringCours.length > 0) {
+        if(stringDevoirs.length > 0) {
             msg.channel.send(`Devoirs du **${bot.devoirs[k].nom}** : *${stringDevoirs}*`);
         } else {
             msg.channel.send(`Aucune entrée n'a encore été saisie !`); //pour insulter l'utilisateur
@@ -50,17 +50,17 @@ module.exports.run = async (bot, msg, args) =>{
         
         for(let i in bot.devoirs){
             if(bot.devoirs[i].guild == guildId && bot.devoirs[i].channel == msg.channel.id && bot.devoirs[i].nom == nomAffiche) {
-                stringCDevoirs = bot.devoirs[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
+                stringDevoirs = bot.devoirs[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
                 k = i; //on sauvegarde l'id du cours trouvé
                 break; //pas la peine de continuer à chercher une entrée, on l'a déjà trouvée
             }
         }
 
         if(stringDevoirs.length > 0) {
-            msg.channel.send(`Cours du **${bot.devoirs[k].nom}** : *${stringDevoirs}*`);
+            msg.channel.send(`Devoir du **${bot.devoirs[k].nom}** : *${stringDevoirs}*`);
         }
         else{
-            msg.channel.send(`Aucun cours nommé **${nomAffiche}**`);
+            msg.channel.send(`Aucun devoir nommé **${nomAffiche}**`);
         }
         return;
     }
