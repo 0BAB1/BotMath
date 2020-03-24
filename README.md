@@ -38,4 +38,5 @@ pour des raison évidentes, le config.json ne figure pas dans ce dépot, voici a
     "prefix" : "!math"
 }
 ```
+il se trouve a la racine du projet
 
