@@ -24,6 +24,7 @@ dans le repertoire racine du projet (ou se touve index.js):
 ```sh
 node index.js
 ```
+un message de confirmation comme quoi le bot est pr^et s'affiche alors
 
 ## Pour contribuer
 
