@@ -5,7 +5,7 @@ module.exports.run = async (bot, msg, args) =>{
     let guildId = msg.guild.id;
     let devoirsArray = new Array;
     let stringDevoirs = new String;
-    let k = new String;
+    let k = "no";
     let allDevoirs = new String;
 
     //===================================//
@@ -19,6 +19,8 @@ module.exports.run = async (bot, msg, args) =>{
                 k = i; //on sauvegarde l'id du dernier cours trouvé
             }
         }
+        
+        if(k === "no") return msg.channel.send('pas de devoirs a afficher `!math addDevoir <titre> <contenu>` pour en ajouter');//si on a rien a afficher
 
         if(stringDevoirs.length > 0) {
             msg.channel.send(`Devoir du **${bot.devoirs[k].nom}** : *${stringDevoirs}*`);
@@ -37,8 +39,12 @@ module.exports.run = async (bot, msg, args) =>{
             {
                 stringDevoirs = bot.devoirs[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
                 allDevoirs += `Devoir du **${bot.devoirs[i].nom}** : *${stringDevoirs}*` + "\n"; //on concatène tous les cours
+                k = "yes" // on chage juste sa valeur pour la verification d'apres
             }
         }
+
+        if(k === "no") return msg.channel.send('pas de devoirs a afficher `!math addDevoir <titre> <contenu>` pour en ajouter');//si on a rien a afficher
+
         msg.channel.send(allDevoirs); //on affiche en une seule fois pour éviter de multiples alertes
     }
     //===================================//

@@ -5,7 +5,7 @@ module.exports.run = async (bot, msg, args) =>{
     let guildId = msg.guild.id;
     let coursArray = new Array;
     let stringCours = new String;
-    let k = new String;
+    let k = "no";
     let allCours = new String;
 
     //===================================//
@@ -19,6 +19,8 @@ module.exports.run = async (bot, msg, args) =>{
                 k = i; //on sauvegarde l'id du dernier cours trouvé
             }
         }
+
+        if(k === "no") return msg.channel.send('pas de cours a afficher `!math addCours <titre> <contenu>` pour en ajouter'); //si on a rien a afficher
 
         if(stringCours.length > 0) {
             msg.channel.send(`Cours du **${bot.cours[k].nom}** : *${stringCours}*`);
@@ -37,8 +39,12 @@ module.exports.run = async (bot, msg, args) =>{
             {
                 stringCours = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
                 allCours += `Cours du **${bot.cours[i].nom}** : *${stringCours}*` + "\n"; //on concatène tous les cours
+                k = "yes"; //on change juste la valeur de k pour la verification d'après
             }
         }
+
+        if(k === "no") return msg.channel.send('pas de cours a afficher `!math addCours <titre> <contenu>` pour en ajouter');//si on a rien a afficher
+
         msg.channel.send(allCours); //on affiche en une seule fois pour éviter de multiples alertes
     }
     //===================================//
@@ -55,7 +61,7 @@ module.exports.run = async (bot, msg, args) =>{
                 break; //pas la peine de continuer à chercher une entrée, on l'a déjà trouvée
             }
         }
-
+        
         if(stringCours.length > 0) {
             msg.channel.send(`Cours du **${bot.cours[k].nom}** : *${stringCours}*`);
         }
