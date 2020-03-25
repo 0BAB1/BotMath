@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
+    let stringDevoir = new String;
+
     if(!msg.member.hasPermission("ADMINISTRATOR")) {
         if(msg.deletable) {
             msg.delete({timeout:3000}); //supression du message
@@ -14,7 +16,7 @@ module.exports.run = async (bot, msg, args) =>{
         return
     }
 
-    if(!args[1]) return msg.channel.send("Précisez un cours."); //s'l n'y a pas de nom précisé
+    if(!args[1]) return msg.channel.send("Précisez ce que vous souhaitez effacer."); //s'l n'y a pas de nom précisé
 
     let k = 0; //iterateur pour savoir si on a trouvé un fichier
 
@@ -26,10 +28,12 @@ module.exports.run = async (bot, msg, args) =>{
     {
         for(let i in bot.devoirs)
         {
-            if(bot.devoirs[i].nom == args[1] && msg.channel.id == bot.devoirs[i].channel && bot.devoirss[i].guild == msg.guild.id)
+            if(bot.devoirs[i].nom == args[1] && msg.channel.id == bot.devoirs[i].channel && bot.devoirs[i].guild == msg.guild.id)
             {
+                stringDevoir = bot.devoirs[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
                 delete bot.devoirs[i]; //on efface la "case"
                 k+=1;
+                break; //pas la peine de continuer à chercher une entrée, on l'a déjà effacée
             }
         }
 
@@ -37,12 +41,12 @@ module.exports.run = async (bot, msg, args) =>{
         {
             fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on sauvegarde
                 if(err) throw err;
-                msg.channel.send(`Le devoir du **${args[1]}** a été supprimé.`);
+                msg.channel.send(`Le devoir pour le **${args[1]}** (*${stringDevoir}*) a été supprimé !`);
             });
         }
         else
         {
-            msg.channel.send("Pas de cours trouvé portant ce nom.");
+            msg.channel.send("Pas de devoir trouvé portant ce nom !");
         }
     }
 
@@ -62,7 +66,7 @@ module.exports.run = async (bot, msg, args) =>{
 
         fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on sauvegarde
             if(err) throw err;
-            msg.channel.send(`Tous les cours ont été supprimés.`);
+            msg.channel.send(`Tous les devoirs ont été supprimés !`);
         });
     }
 }

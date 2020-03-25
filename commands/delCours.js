@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
+    let stringCours = new String;
+
     if(!msg.member.hasPermission("ADMINISTRATOR")) {
         if(msg.deletable) {
             msg.delete({timeout:3000}); //supression du message
