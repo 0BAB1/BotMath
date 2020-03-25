@@ -60,7 +60,7 @@ module.exports.run = async (bot, msg, args) =>{
             }
         }
 
-        fs.writeFile("./cours/last.json", JSON.stringify(bot.cours, null, 4), err =>{ //on sauvegarde
+        fs.writeFile("./cours/cours.json", JSON.stringify(bot.cours, null, 4), err =>{ //on sauvegarde
             if(err) throw err;
             msg.channel.send(`Tous les cours ont été supprimés !`);
         });
