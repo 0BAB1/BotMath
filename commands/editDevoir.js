@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
+    let mErr = "Veuillez bien tout préciser : `!math editDevoir <date> <contenu du cours>`."
+
     if(!msg.member.hasPermission("ADMINISTRATOR")) {
         if(msg.deletable) {
             msg.delete({timeout:3000}); //supression du message
@@ -46,7 +48,7 @@ module.exports.run = async (bot, msg, args) =>{
     }
     else
     {
-        msg.channel.send("Veuillez bien tout préciser : `!math editDevoir <date> <contenu du cours>`.");
+        msg.channel.send(mErr);
     }
 }
 

@@ -6,7 +6,7 @@ module.exports.run = async (bot, msg, args) =>{
     let stringDevoirs = new String;
     let stringAffichage = "";
     let allDevoirs = new String;
-    let mErr = 'Pas de devoir à afficher ! `!math addDevoir <date> <contenu du devoir>` pour en ajouter.';
+    let mErr = 'Pas de devoir à afficher : `!math addDevoir <date> <contenu du devoir>` pour en ajouter.';
 
     //===================================//
     //=====afficher le dernier cours=====//
