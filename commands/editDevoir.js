@@ -32,20 +32,21 @@ module.exports.run = async (bot, msg, args) =>{
 
                 fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on les sauvegarde
                     if(err) throw err;
-                
-                    msg.channel.send(`Nouveau contenu du devoir du **${bot.devoirs[i].nom}** : \`${content.join().replace(/,/g, " ")}\``);
+                    msg.channel.send(`Nouveau contenu du devoir pour le **${bot.devoirs[i].nom}** : *${content.join(" ")}*`);
                 });
                 k+=1; //si ca trouve un cours avec le bon nom
+                break; //pas la peine de continuer, on a déjà modifié un devoir
             }
-        } // on retouve le cours en question
+        } // on retouve le devoir en question
 
-        if(k === 0) return msg.channel.send(`Pas de modificaton car pas de cours nommé ${args[1]}`); // message d'erreur si k = 0 car ca veut dire que acun msg n'a été trouvé !
+        // message d'erreur si k = 0 car ca veut dire que acun msg n'a été trouvé !
+        if(k === 0) return msg.channel.send(`Pas de modificaton car il n'y a pas de devoir pour le **${args[1]}**`);
 
         return;
     }
     else
     {
-        msg.channel.send("Veuillez bien tout préciser (\`!math help\` pour plus d'infos) !");
+        msg.channel.send("Veuillez bien tout préciser : `!math editDevoir <date> <contenu du cours>`.");
     }
 }
 

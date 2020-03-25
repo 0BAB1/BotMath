@@ -14,14 +14,14 @@ module.exports.run = async (bot, msg, args) =>{
         return
     }
 
-    if(args[1] && args[2])//si tout les arguments on été précisés, on peut traiter la demande
+    if(args[1] && args[2])//si tous les arguments on été précisés, on peut traiter la demande
     {
         let content = args.splice(2, args.length - 1);
         let k = 0; //un itérateur
 
         for(i in bot.cours)
         {
-            if(bot.cours[i].nom == args[1] && bot.cours[i].guild == msg.guild.id && content.cours[i].channel == msg.channel.id)
+            if(bot.cours[i].nom == args[1] && bot.cours[i].guild == msg.guild.id && bot.cours[i].channel == msg.channel.id)
             {
                 bot.cours[i] = { //on écrase les données
                     guild: msg.guild.id,
@@ -30,22 +30,23 @@ module.exports.run = async (bot, msg, args) =>{
                     channel: msg.channel.id
                 };
 
-                fs.writeFile("./cours/last.json", JSON.stringify(bot.cours, null, 4), err =>{ //on les sauvegarde
+                fs.writeFile("./cours/cours.json", JSON.stringify(bot.cours, null, 4), err =>{ //on les sauvegarde
                     if(err) throw err;
-                
-                    msg.channel.send(`Nouveau contenu du cours du **${bot.cours[i].nom}** : *${content.join().replace(/,/g, " ")}*`);
+                    msg.channel.send(`Nouveau contenu pour le cours du **${bot.cours[i].nom}** : *${content.join(" ")}*`);
                 });
                 k+=1; //si ca trouve un cours avec le bon nom
+                break; //pas la peine de continuer, on a déjà modifié un cours
             }
         } // on retouve le cours en question
 
-        if(k === 0) return msg.channel.send(`Pas de modificaton car pas de cours nommé **${args[1]}**`); // message d'erreur si k = 0 car ca veut dire que acun msg n'a été trouvé !
+        // message d'erreur si k = 0 car ca veut dire que acun msg n'a été trouvé !
+        if(k === 0) return msg.channel.send(`Pas de modificaton car il n'y a pas eu de cours le **${args[1]}** !`);
 
         return;
     }
     else
     {
-        msg.channel.send("Veuillez bien tout préciser (\"!math help\" pour plus d'infos) !");
+        msg.channel.send("Veuillez bien tout préciser : `!math editCours <date> <contenu du cours>`.");
     }
 }
 
