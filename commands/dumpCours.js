@@ -3,10 +3,10 @@ const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
     let guildId = msg.guild.id;
-    let coursArray = new Array;
     let stringCours = new String;
-    let k = "no";
+    let stringAffichage = "";
     let allCours = new String;
+    let mErr = 'Pas de cours à afficher ! `!math addCours <date> <contenu du cours>` pour en ajouter.';
 
     //===================================//
     //=====afficher le dernier cours=====//
@@ -16,16 +16,14 @@ module.exports.run = async (bot, msg, args) =>{
         for(let i in bot.cours){
             if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id) {
                 stringCours = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
-                k = i; //on sauvegarde l'id du dernier cours trouvé
+                stringAffichage = `Cours du **${bot.cours[i].nom}** : *${stringCours}*.`;
             }
         }
 
-        if(k === "no") return msg.channel.send('pas de cours a afficher `!math addCours <titre> <contenu>` pour en ajouter'); //si on a rien a afficher
-
         if(stringCours.length > 0) {
-            msg.channel.send(`Cours du **${bot.cours[k].nom}** : *${stringCours}*`);
-        } else {
-            msg.channel.send(`Aucune entrée n'a encore été saisie !`); //pour insulter l'utilisateur
+            msg.channel.send(stringAffichage);
+        } else { //si on n'a rien à afficher
+            msg.channel.send(mErr);
         }
         return;
     }
@@ -38,12 +36,14 @@ module.exports.run = async (bot, msg, args) =>{
             if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id && bot.cours[i].guild == msg.guild.id) 
             {
                 stringCours = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
-                allCours += `Cours du **${bot.cours[i].nom}** : *${stringCours}*` + "\n"; //on concatène tous les cours
-                k = "yes"; //on change juste la valeur de k pour la verification d'après
+                allCours += `Cours du **${bot.cours[i].nom}** : *${stringCours}*.\n`; //on concatène tous les cours
             }
         }
 
-        if(k === "no") return msg.channel.send('pas de cours a afficher `!math addCours <titre> <contenu>` pour en ajouter');//si on a rien a afficher
+        //si on a rien a afficher
+        if(stringCours.length == 0) {
+            return msg.channel.send(mErr);
+        }
 
         msg.channel.send(allCours); //on affiche en une seule fois pour éviter de multiples alertes
     }
@@ -52,21 +52,21 @@ module.exports.run = async (bot, msg, args) =>{
     //===================================//
     else
     {
-        let nomAffiche = args[1];
+        let nomDemande = args[1];
         
         for(let i in bot.cours){
-            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id && bot.cours[i].nom == nomAffiche) {
+            //on concatène tous les cours commençant par nomAffiche
+            if(bot.cours[i].guild == guildId && bot.cours[i].channel == msg.channel.id && bot.cours[i].nom.startsWith(nomDemande)) {
                 stringCours = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
-                k = i; //on sauvegarde l'id du cours trouvé
-                break; //pas la peine de continuer à chercher une entrée, on l'a déjà trouvée
+                stringAffichage += `Cours du **${bot.cours[i].nom}** : *${stringCours}*.\n`
             }
         }
         
         if(stringCours.length > 0) {
-            msg.channel.send(`Cours du **${bot.cours[k].nom}** : *${stringCours}*`);
+            msg.channel.send(stringAffichage);
         }
         else{
-            msg.channel.send(`Aucun cours nommé **${nomAffiche}**`);
+            msg.channel.send(`Il n'y a pas eu de cours le **${nomDemande}**.`);
         }
         return;
     }
