@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
+    let m = "";
+
     if(!msg.member.hasPermission("ADMINISTRATOR")) {
         if(msg.deletable) {
             msg.delete({timeout:3000}); //supression du message
@@ -19,11 +21,12 @@ module.exports.run = async (bot, msg, args) =>{
         let content = args.splice(2, args.length - 1);
         let timeId = Math.floor(Date.now()/1000);
 
+        //recherche d'une entrée portant déjà le nom donné
         for(let i in bot.devoirs)
         {
             if(bot.devoirs[i].nom == args[1] && bot.devoirs[i].channel == msg.channel.id && bot.devoirs[i].guild == msg.guild.id){
                 args[1] = `${args[1]}-2`;
-                msg.channel.send(`Nom déja utilisé, j'ai modifié le nom en : ${args[1]}`);
+                m = `Nom déja utilisé, j'ai modifié le nom en : **${args[1]}**\n`; //on sauvegarde pour n'afficher qu'un seul futur message
             };
         }
 
@@ -36,7 +39,8 @@ module.exports.run = async (bot, msg, args) =>{
 
         fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on l'ecrit dans le .json
             if(err) throw err;
-            msg.channel.send(`*${content.join(" ")}* : a été défini comme contenu du dernier cours, sous le nom de **${args[1]}**`);
+            m += `Nouveau devoir pour le **${args[1]}** : *${content.join(" ")}*`;
+            msg.channel.send(m);
         });
     }
     else
