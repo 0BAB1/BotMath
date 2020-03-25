@@ -1,6 +1,17 @@
 const Discord = require('discord.js');
 const fs = require("fs");
 
+//function found here : https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
+function validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+  }
+
 module.exports.run = async (bot, msg, args) =>{
     let m = "";
 
@@ -20,6 +31,13 @@ module.exports.run = async (bot, msg, args) =>{
     {
         let content = args.splice(2, args.length - 1);
         let timeId = Math.floor(Date.now()/1000);
+
+        //traitement du content pour éviter une intégration des url dans la réponse du bot
+        for(let m in content){
+            if(validURL(content[m])) {
+                content[m] = "<"+content[m]+">";
+            }
+        }
 
         //recherche d'une entrée portant déjà le nom donné
         for(i in bot.cours)
