@@ -14,7 +14,7 @@ module.exports.run = async (bot, msg, args) =>{
         return
     }
 
-    if(!args[1]) return msg.channel.send("Précisez un cours !"); //s'il n'y a pas de nom précisé
+    if(!args[1]) return msg.channel.send("Précisez ce que vous souhaitez effacer."); //s'il n'y a pas de nom précisé
 
     let k = 0; //iterateur pour savoir si on a trouvé un fichier
 
@@ -28,16 +28,18 @@ module.exports.run = async (bot, msg, args) =>{
         {
             if(bot.cours[i].nom == args[1] && msg.channel.id == bot.cours[i].channel && bot.cours[i].guild == msg.guild.id)
             {
+                stringCours = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
                 delete bot.cours[i]; //on efface la "case" et l'objet cours qui s'y trouve
                 k+=1;
+                break; //pas la peine de continuer à chercher une entrée, on l'a déjà effacée
             }
         }
 
         if(k >= 1)
         {
-            fs.writeFile("./cours/last.json", JSON.stringify(bot.cours, null, 4), err =>{ //on sauvegarde
+            fs.writeFile("./cours/cours.json", JSON.stringify(bot.cours, null, 4), err =>{ //on sauvegarde
                 if(err) throw err;
-                msg.channel.send(`Le cours du **${args[1]}** a été supprimé !`);
+                msg.channel.send(`Le cours du **${args[1]}** (*${stringCours}*) a été supprimé !`);
             });
         }
         else
@@ -54,7 +56,7 @@ module.exports.run = async (bot, msg, args) =>{
     {
         for(let i in bot.cours)
         {
-            if(msg.channel.id == bot.cours[i].channel && bot.cours[i].guild == msg.guild.id)//seulement ceux du serv est du channel en question quand meme !
+            if(msg.channel.id == bot.cours[i].channel && bot.cours[i].guild == msg.guild.id)//seulement ceux du serveur est du channel en question quand meme !
             {
                 delete bot.cours[i]; //on efface a chaque iteration, on efface TOUT
             }
