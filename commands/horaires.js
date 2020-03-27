@@ -5,6 +5,10 @@ module.exports.run = async (bot, msg, args) => {
     let defaultTxt = "à renseigner";
     let week = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"];
 
+    //=====================================//
+    //======définir valeur par defaut======//
+    //=====================================//
+
     if(!bot.horaires[msg.channel.id]) //s'il n'y a pas d'horaires associés à ce channel, on y met des horaires par défaut , ici "à reseigner"
     {
         bot.horaires[msg.channel.id] = {
@@ -21,6 +25,10 @@ module.exports.run = async (bot, msg, args) => {
             //pas de retour à base de msg.channel.send car cette opération doit être transparente !
         });
     }
+
+    //=====================================//
+    //============tout afficher============//
+    //=====================================//
 
     if(!args[1]){
         let embed = new Discord.MessageEmbed()
@@ -44,6 +52,9 @@ module.exports.run = async (bot, msg, args) => {
 
         msg.channel.send(embed);
     }
+    //=====================================//
+    //===============modifier==============//
+    //=====================================//
     else {
         if(!msg.member.hasPermission("ADMINISTRATOR")) { //on check les perms, sinon, ça dégage !
             if(msg.deletable) {
