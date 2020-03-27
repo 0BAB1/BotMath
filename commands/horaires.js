@@ -3,6 +3,10 @@ const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) => {
 
+    //=====================================//
+    //======définir valeur par defaut======//
+    //=====================================//
+
     if(!bot.horaires[msg.channel.id])//si il n'y as pas d'horraires associés a ce channel, on y met des horraires par defaut , ici "a reseigner"
     {
         let defaultTxt = "a renseigner";
@@ -21,6 +25,10 @@ module.exports.run = async (bot, msg, args) => {
         });
     }
 
+    //=====================================//
+    //============tout afficher============//
+    //=====================================//
+
     if(!args[1]){
         let embed = new Discord.MessageEmbed()
             .setTitle("Les horaires de cours")
@@ -36,6 +44,9 @@ module.exports.run = async (bot, msg, args) => {
         
         msg.channel.send(embed);
     }
+    //=====================================//
+    //===============modifier==============//
+    //=====================================//
     else
     {
         if(!msg.member.hasPermission("ADMINISTRATOR")) { // on check les perms, sinon, ça dégage !
@@ -56,6 +67,10 @@ module.exports.run = async (bot, msg, args) => {
 
         let newHoraires = args.splice(2, args.length - 1).join(" "); //on prend tout les argument du 3 eme au dernier C.A.D les nouveaux horraires
 
+        //=====================================//
+        //=========appliquer l'horraire========//
+        //=====================================//
+
         switch(args[1]){ //il n'y a que 5 jours, on peut se permettre de faire un switch
             case 'lundi':
                 bot.horaires[msg.channel.id].lundi = newHoraires;
@@ -72,6 +87,7 @@ module.exports.run = async (bot, msg, args) => {
                     msg.channel.send(`nouvel horaire du **${args[1]}** : *${newHoraires}*`);
                 });
                 break;
+
             case 'mercredi':
                 bot.horaires[msg.channel.id].mercredi = newHoraires;
                 fs.writeFile("./horaires.json", JSON.stringify(bot.horaires, null, 4), err =>{ //on oublie pas de save ca !
