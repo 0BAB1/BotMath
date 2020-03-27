@@ -13,7 +13,7 @@ function validURL(str) {
   }
 
 module.exports.run = async (bot, msg, args) =>{
-    let m = "";
+    let m = ""; //message à affichers
     let k = 1; //pour compter le nombre d'entrées portant déjà le même nom
 
     if(!msg.member.hasPermission("ADMINISTRATOR")) {
