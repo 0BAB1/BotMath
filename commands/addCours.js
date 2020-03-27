@@ -14,7 +14,7 @@ function validURL(str) {
 
 module.exports.run = async (bot, msg, args) =>{
     let m = ""; //message à affichers
-    let k = 1; //pour compter le nombre d'entrées portant déjà le même nom
+    let k = 1; //pour compter le nombre d'entrées portant déjà le même nom, il y en a au moins une
 
     if(!msg.member.hasPermission("ADMINISTRATOR")) {
         if(msg.deletable) {
@@ -43,17 +43,13 @@ module.exports.run = async (bot, msg, args) =>{
         //recherche d'une ou plusieurs entrées portant déjà le nom donné
         for(i in bot.cours)
         {
-            //if(bot.cours[i].nom == args[1] && bot.cours[i].channel == msg.channel.id && bot.cours[i].guild == msg.guild.id){
             if(bot.cours[i].nom.startsWith(args[1]) && bot.cours[i].channel == msg.channel.id && bot.cours[i].guild == msg.guild.id){
                 k ++;
-                //args[1] = `${args[1]}-2`;
-                //m = `Nom déja utilisé, j'ai modifié le nom en : **${args[1]}**\n`; //on sauvegarde pour n'afficher qu'un seul futur message
             }
-            if(k>1) {
-                args[1] = `${args[1]}-${k}`;
-                m = `Nom déja utilisé, j'ai modifié le nom en : **${args[1]}**\n`; //on sauvegarde pour n'afficher qu'un seul futur message
-            }
-            
+        }
+        if(k>1) {
+            args[1] = `${args[1]}-${k}`;
+            m = `Nom déja utilisé, j'ai modifié le nom en : **${args[1]}**\n`; //on sauvegarde pour n'afficher qu'un seul futur message
         }
 
         bot.cours[timeId] = { //on utilise le temps pour donner un Id à notre cours, de plus, on pourra les trier par ordre chrono dans dumpCours.js
