@@ -4,6 +4,7 @@ const fs = require("fs");
 module.exports.run = async (bot, msg, args) => {
     let defaultTxt = "à renseigner";
     let week = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"];
+    let m = "";
 
     //=====================================//
     //======définir valeur par defaut======//
@@ -30,7 +31,7 @@ module.exports.run = async (bot, msg, args) => {
     //============tout afficher============//
     //=====================================//
 
-    if(!args[1]){
+    if(!args[1]){ //args[1] est le nom du jour écrit après "horaires"
         let embed = new Discord.MessageEmbed()
             .setTitle("Les horaires de cours")
             .setColor('#4bff5b')
@@ -67,22 +68,23 @@ module.exports.run = async (bot, msg, args) => {
     
             return;
         }
-        //=====================================//
-        //vérifier si l'horaire est appliquable//
-        //=====================================//
-        if(!args[2]) return msg.channel.send('Renseignez un nouvel horaire !'); // s'il n'y a pas de nouvel horraire précisé
 
-        let newSchedule = args.splice(2, args.length - 1).join(" "); //on prend tous les arguments du 3 eme au dernier c.a.d les nouveaux horaires
+        //on prend tous les arguments du 3e au dernier c.a.d les nouveaux horaires
+        //newSchedule peut être vide, si aucun horaire n'est précisé après le nom du jour
+        let newSchedule = args.splice(2, args.length - 1).join(" ");
         
-        //version factorisée du switch
+        //version factorisée du switch, avec prise en compte de la supression d'un horaire
         if(week.includes(args[1])) {
-            bot.horaires[msg.channel.id][args[1]] = newSchedule;
+            //s'il n'y a pas d'horaire précisé, c.a.d si newSchedule est vide, on supprime l'horaire
+            bot.horaires[msg.channel.id][args[1]] = (newSchedule.length==0) ? defaultTxt : newSchedule;
+            m = (newSchedule.length==0) ? `Supression de l'horaire du **${args[1]}**.` : `Nouvel horaire du **${args[1]}** : *${newSchedule}*.`;
+
             fs.writeFile("./horaires.json", JSON.stringify(bot.horaires, null, 4), err =>{
                 if(err) throw err;
-                msg.channel.send(`Nouvel horaire du **${args[1]}** : *${newSchedule}*`);
+                msg.channel.send(m);
             });
         } else {
-            msg.channel.send(`${args[1]} n'est pas un jour valide !`);
+            msg.channel.send(`**${args[1]}** n'est pas un jour valide ! Les jours valides sont : ${week.join(", ")}.`);
         }
 
         /*
