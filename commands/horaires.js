@@ -13,7 +13,6 @@ module.exports.run = async (bot, msg, args) => {
     if(!bot.horaires[msg.channel.id]) //s'il n'y a pas d'horaires associés à ce channel, on y met des horaires par défaut , ici "à reseigner"
     {
         bot.horaires[msg.channel.id] = {
-            guild : msg.guild.id, //utilité ?
             Lundi : defaultTxt, //les majuscules au nom des jours sont importantes
             Mardi : defaultTxt, //car on va les afficher directement dans l'embed
             Mercredi : defaultTxt,
@@ -86,53 +85,6 @@ module.exports.run = async (bot, msg, args) => {
         } else {
             msg.channel.send(`**${args[1]}** n'est pas un jour valide ! Les jours valides sont : ${week.join(", ")}.`);
         }
-
-        /*
-        switch(args[1]){ //il n'y a que 5 jours, on peut se permettre de faire un switch
-            case 'Lundi':
-                bot.horaires[msg.channel.id].Lundi = newHoraires;
-                fs.writeFile("./horaires.json", JSON.stringify(bot.horaires, null, 4), err =>{
-                    if(err) throw err;
-                    msg.channel.send(`Nouvel horaire du **${args[1]}** : *${newHoraires}*`);
-                });
-                break;
-
-            case 'Mardi':
-                bot.horaires[msg.channel.id].Mardi = newHoraires;
-                fs.writeFile("./horaires.json", JSON.stringify(bot.horaires, null, 4), err =>{
-                    if(err) throw err;
-                    msg.channel.send(`Nouvel horaire du **${args[1]}** : *${newHoraires}*`);
-                });
-                break;
-
-            case 'Mercredi':
-                bot.horaires[msg.channel.id].Mercredi = newHoraires;
-                fs.writeFile("./horaires.json", JSON.stringify(bot.horaires, null, 4), err =>{
-                    if(err) throw err;
-                    msg.channel.send(`Nouvel horaire du **${args[1]}** : *${newHoraires}*`);
-                });
-                break;
-
-            case 'Jeudi':
-                bot.horaires[msg.channel.id].Jeudi = newHoraires;
-                fs.writeFile("./horaires.json", JSON.stringify(bot.horaires, null, 4), err =>{
-                    if(err) throw err;
-                    msg.channel.send(`Nouvel horaire du **${args[1]}** : *${newHoraires}*`);
-                });
-                break;
-
-            case 'Vendredi':
-                bot.horaires[msg.channel.id].Vendredi = newHoraires;
-                fs.writeFile("./horaires.json", JSON.stringify(bot.horaires, null, 4), err =>{
-                    if(err) throw err;
-                    msg.channel.send(`Nouvel horaire du **${args[1]}** : *${newHoraires}*`);
-                });
-                break;
-
-            default:
-                msg.channel.send(`${args[1]} n'est pas un jour valide !`);
-        }
-        */
     }
 }
 
