@@ -11,7 +11,7 @@ Pour avoir de l'aide dans discord tapez tout simplement :
 
 ## Installation des dépendances
 
-Linux & Windows : après avoir installer node.js
+Linux & Windows : après avoir installé node.js
 ```sh
 npm install discord.js
 ```
@@ -33,7 +33,7 @@ Créez un nouvelle commande dans /commands/nomCommande.js, tout autre requête s
 Votre commande à ajouter doit etre utile !
 
 ## Le config.json
-Pour des raison évidentes, le config.json ne figure pas dans ce dépot, voici a quoi le votre doir ressembler : 
+Pour des raison évidentes, le config.json ne figure pas dans ce dépot, voici a quoi le votre doit ressembler : 
 ```json
 {
     "token" : "votre token",
