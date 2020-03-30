@@ -43,7 +43,7 @@ module.exports.run = async (bot, msg, args) =>{
 
         fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on l'ecrit dans le .json
             if(err) throw err;
-            m += `Nouveau devoir pour le **${args[1]}** : *${content.join(" ")}*`;
+            m += `Nouveau devoir pour le **${args[1]}** : *${content.join(" ")}*.`;
             msg.channel.send(m);
         });
     }
