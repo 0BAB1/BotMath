@@ -61,7 +61,7 @@ module.exports.run = async (bot, msg, args) =>{
 
         fs.writeFile("./cours/cours.json", JSON.stringify(bot.cours, null, 4), err =>{ //on l'écrit dans le .json
             if(err) throw err;
-            m += `Nouveau cours du **${args[1]}** : *${content.join(" ")}*`;
+            m += `Nouveau cours du **${args[1]}** : *${content.join(" ")}*.`;
             msg.channel.send(m);
         });
     }
