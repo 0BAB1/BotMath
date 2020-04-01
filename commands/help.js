@@ -1,7 +1,18 @@
 const Discord = require('discord.js');
 
 module.exports.run = async (bot, msg, args) => {
-    if(!msg.member.hasPermission("ADMINISTRATOR")) return msg.channel.send("Vous n'avez pas la permission d'effectuer cette action !");
+    if(!msg.member.hasPermission("ADMINISTRATOR")) {
+        if(msg.deletable) {
+            msg.delete({timeout:3000}); //supression du message
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action, supression du message dans 3 secondes !")
+                .then(b_msg => {b_msg.delete({timeout:3000});}); //supression de la réponse du bot
+        } else {
+            msg.reply("Vous n'avez pas la permission d'effectuer cette action !");
+        }
+
+        return
+    }
+    
     if(!args[1]){
         let embed = new Discord.MessageEmbed()
             .setTitle("Aide sur les commandes.")

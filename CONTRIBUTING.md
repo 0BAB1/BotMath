@@ -1,9 +1,9 @@
-# pour contribuer
+# Pour contribuer
 
-nous ne prenons que les nouvelles idées de commandes utilies et prêtes a l'emplois
->creez tout simplement votre nouvelle commande dans commands/<nomCommande>.js
+Nous ne prenons que les nouvelles idées de commandes utiles et prêtes à l'emploi.
+>Créez tout simplement votre nouvelle commande dans un fichier commands/nomCommande.js
 
-# base d'une commande
+# Base d'une commande
 
 ```javascript
 const Discord = require('discord.js');
@@ -15,11 +15,11 @@ module.exports.run = async (bot, msg, args) =>{
 
 module.exports.help = {
     name: "nomCommande",
-    desc: "`decription de votre commande pour !math help`"
+    desc: "`decription de votre commande pour !math <nomCommande>`"
 }
 ```
-bonne chance !
+Bonne chance !
 
-# pour executer le bot chez vous
+# Pour exécuter le bot chez vous
 
-voici un tutoriel (par moi même) avec les bases : https://youtu.be/ptctgM9_jTU
+Voici un tutoriel (par moi-même) avec les bases : https://youtu.be/ptctgM9_jTU

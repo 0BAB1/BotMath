@@ -3,6 +3,7 @@ const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
     let m = "";
+    let k = 1; //pour compter le nombre d'entrées portant déjà le même nom, il y en a au moins une
 
     if(!msg.member.hasPermission("ADMINISTRATOR")) {
         if(msg.deletable) {
@@ -21,13 +22,16 @@ module.exports.run = async (bot, msg, args) =>{
         let content = args.splice(2, args.length - 1);
         let timeId = Math.floor(Date.now()/1000);
 
-        //recherche d'une entrée portant déjà le nom donné
+        //recherche d'une ou plusieurs entrées portant déjà le nom donné
         for(let i in bot.devoirs)
         {
-            if(bot.devoirs[i].nom == args[1] && bot.devoirs[i].channel == msg.channel.id && bot.devoirs[i].guild == msg.guild.id){
-                args[1] = `${args[1]}-2`;
-                m = `Nom déja utilisé, j'ai modifié le nom en : **${args[1]}**\n`; //on sauvegarde pour n'afficher qu'un seul futur message
+            if(bot.devoirs[i].nom.startsWith(args[1]) && bot.devoirs[i].channel == msg.channel.id && bot.devoirs[i].guild == msg.guild.id){
+                k ++;
             };
+        }
+        if(k>1) {
+            args[1] = `${args[1]}-${k}`;
+            m = `Nom déja utilisé, j'ai modifié le nom en : **${args[1]}**\n`; //on sauvegarde pour n'afficher qu'un seul futur message
         }
 
         bot.devoirs[timeId] = { //on utilise le temps pour donner un Id à notre cours, de plus, on pourra les trier par ordre chrono dans dumpCours.js
@@ -39,7 +43,7 @@ module.exports.run = async (bot, msg, args) =>{
 
         fs.writeFile("./cours/devoirs.json", JSON.stringify(bot.devoirs, null, 4), err =>{ //on l'ecrit dans le .json
             if(err) throw err;
-            m += `Nouveau devoir pour le **${args[1]}** : *${content.join(" ")}*`;
+            m += `Nouveau devoir pour le **${args[1]}** : *${content.join(" ")}*.`;
             msg.channel.send(m);
         });
     }
