@@ -30,7 +30,7 @@ module.exports.run = async (bot, msg, args) =>{
         {
             if(bot.cours[i].nom == args[1] && msg.channel.id == bot.cours[i].channel && bot.cours[i].guild == msg.guild.id)
             {
-                stringCours = bot.cours[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
+                stringCours = bot.cours[i].contenu;
                 delete bot.cours[i]; //on efface la "case" et l'objet cours qui s'y trouve
                 k+=1;
                 break; //pas la peine de continuer à chercher une entrée, on l'a déjà effacée
