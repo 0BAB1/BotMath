@@ -39,7 +39,7 @@ module.exports.run = async (bot, msg, args) => {
         
         //on n'affiche que les jours où il y a cours
         for(let m in bot.horaires[msg.channel.id]) {
-            if(m!="guild" && bot.horaires[msg.channel.id][m] != defaultTxt){
+            if(bot.horaires[msg.channel.id][m] != defaultTxt){
                 embed.addField(`${m} : `, bot.horaires[msg.channel.id][m]);
             }
         }
