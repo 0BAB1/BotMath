@@ -14,7 +14,7 @@
                 général
 ===========================================*/
 
-h1
+h1, h2
 {
     font-family: titre;
     color: white;
@@ -25,11 +25,38 @@ body
     background-color: rgb(48, 48, 48);
     display: flex;
     justify-content: center;
+    padding-top: 25px;
 }
 
 #subBody
 {
-    width: 60%;
+    width: 75%;
+}
+
+a, p
+{
+    font-family: texte;
+    color: white;
+    font-size: 1.25em;
+}
+
+a:visited
+{
+    color: white;
+}
+
+#main
+{
+    display: flex;
+    flex-direction: row;
+}
+
+code
+{
+    background-color: rgb(37, 37, 37);
+    border: 1px solid rgb(65, 65, 65);
+    border-radius: 5px;
+    padding: 7px;
 }
 
 /*===========================================
@@ -41,12 +68,65 @@ body
     display: flex;
     flex-direction: row;
     justify-content: left;
-    background-color: rgb(33, 32, 36);
-    border-radius: 4px;
+    background-color: rgb(34, 33, 39);
+    border-radius: 3px 3px 3px 0;
 }
 
 #header img
 {
-    margin-left: 25px;
-    margin-right: 25px;
+    margin-left: 50px;
+}
+
+#header h1
+{
+    margin-left: 50px;
+}
+
+/*===========================================
+                Menus
+===========================================*/
+
+#menu
+{
+    width: 17%;
+    border-radius: 0 0 3px 3px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: rgb(34, 33, 39);
+}
+
+#menu ul
+{
+    list-style-type: none;
+    color: white;
+    display: block;
+    text-align: center;
+    padding:0;
+    margin-top: -50px; /*pour compenser le margin top du li*/
+}
+
+#menu a
+{
+    text-decoration: none;
+    font-size: 1.75em;
+}
+
+#menu ul li
+{
+    margin-top: 50px;
+}
+
+/*===========================================
+            Contenu de page
+===========================================*/
+
+#content
+{
+    padding: 10px;
+    width: 83%; /*car le menu a une largeur de 17 %, 83+17 = 100 % donc tout le #main est occupé !*/
+}
+
+#content h1, h2
+{
+    text-align: center;
 }
