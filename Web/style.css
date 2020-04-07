@@ -1,0 +1,52 @@
+@font-face 
+{
+    font-family: titre;
+    src: url(polices/titre.ttf);
+}
+
+@font-face 
+{
+    font-family: texte;
+    src: url(polices/texte.ttf);
+}
+
+/*===========================================
+                général
+===========================================*/
+
+h1
+{
+    font-family: titre;
+    color: white;
+}
+
+body
+{
+    background-color: rgb(48, 48, 48);
+    display: flex;
+    justify-content: center;
+}
+
+#subBody
+{
+    width: 60%;
+}
+
+/*===========================================
+              partie haute
+===========================================*/
+
+#header
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    background-color: rgb(33, 32, 36);
+    border-radius: 4px;
+}
+
+#header img
+{
+    margin-left: 25px;
+    margin-right: 25px;
+}
