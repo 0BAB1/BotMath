@@ -8,6 +8,7 @@ bot.mutes = require("./mutes.json");
 bot.cours = require("./cours/cours.json");
 bot.devoirs = require("./cours/devoirs.json");
 bot.horaires = require("./horaires.json");
+bot.utilisateurs = require("./cours/utilisateurs.json");
 
 //=============================================================================================//
 //===========================initialisation de la collection de commandes======================//
@@ -41,7 +42,7 @@ bot.on("ready", async () => {
     //=========présence discord==========//
     //===================================//
 
-    bot.user.setActivity('Aide : salon "bot"', {type : 'WATCHING'});
+    bot.user.setActivity('math-bot-help', {type : 'WATCHING'});
 
     //===================================//
     //======génération lien invite=======//
@@ -90,7 +91,7 @@ bot.on("message", async msg => {
     if(msg.author.bot) return; //.bot return un booleen true si l'auteur est un bot
     if(msg.channel.type === "dm") return; // .channel.type return le type de channel , si c'est en DM , on arrete
 
-    let messageArray = msg.content.split(" "); //.msg.content return le contenu du message (msg) .split(" ") va le decouper selon les especes et ranger chaque mot dans un tableau nommé "cmd"
+    let messageArray = msg.content.split(" "); //.msg.content return le contenu du message (msg) .split(" ") va le decouper selon les especes et ranger chaque mot dans un tableau nommé "messageArray"
     let command = messageArray[0];
     let args = messageArray.slice(1); // va supprimer la commande (prefixe) de l'array car deja dans "commande"
 

@@ -30,7 +30,7 @@ module.exports.run = async (bot, msg, args) =>{
         {
             if(bot.devoirs[i].nom == args[1] && msg.channel.id == bot.devoirs[i].channel && bot.devoirs[i].guild == msg.guild.id)
             {
-                stringDevoir = bot.devoirs[i].contenu.join(" "); // traitement pour avoir une belle string a afficher
+                stringDevoir = bot.devoirs[i].contenu;
                 delete bot.devoirs[i]; //on efface la "case"
                 k+=1;
                 break; //pas la peine de continuer à chercher une entrée, on l'a déjà effacée
