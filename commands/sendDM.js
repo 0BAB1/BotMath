@@ -3,7 +3,7 @@ const fs = require("fs");
 
 module.exports.run = async (bot, msg, args) =>{
     let channelMembers = new Discord.Collection;
-    let excluded_users = ["math-bot", "Mme LEGRAS", "Mme Nadin", "colin.mrozinski", "M. MARQUENET", "Mme RABERIN", "M. MAZAT"];
+    let excluded_users = ["math-bot", "Mme LEGRAS", "Mme Nadin", "colin.mrozinski", "M. MARQUENET"]; //, "M. MAZAT" , "Mme RABERIN"
     let nom, alias, mID, aff = new String;
     let dfltKey = "default_key", dfltTxt = "default_txt";
     let n_add = 0, k_add = false;
@@ -48,15 +48,13 @@ module.exports.run = async (bot, msg, args) =>{
                 //si l'utilisateur est déjà dans la base de données, on rajoute une clef à la clef messages
                 //mais à condition que args[2] existe (clef précisée dans la commande)
                 if(bot.utilisateurs[memberID]) {
-                    //console.log(`${member.user.username} est déjà dans la BDD.`);
                     if(args[2]) {
-                        //console.log(`Rajout de ${args[2]} en tant que clef de la clef messages.`);
                         bot.utilisateurs[memberID].messages[args[2]] = `${dfltTxt}`;
                         dfltKey = args[2];
                         k_add = true;
                     }
                 }
-                //s'il l'utilisateur n'est pas dans la base de données, on l'ajoute
+                //si l'utilisateur n'est pas dans la base de données, on l'ajoute
                 else {
                     nom = member.user.username;
                     alias = member.nickname;
@@ -79,41 +77,49 @@ module.exports.run = async (bot, msg, args) =>{
                 if(err) throw err;
 
                 if(n_add===0) {
-                    aff = `Extraction des membres du salon effectuée (aucun nouvel utilisateur ajouté à la base de données).`;
+                    aff += `Extraction des membres du salon effectuée (aucun nouvel utilisateur ajouté à la base de données).`;
                 }else if(n_add===1) {
-                    aff = `Extraction des membres du salon effectuée (1 nouvel utilisateur ajouté à la base de données).`;
+                    aff += `Extraction des membres du salon effectuée (1 nouvel utilisateur ajouté à la base de données).`;
                 } else {
-                    aff = `Extraction des membres du salon effectuée (${n_add} nouveaux utilisateurs ajoutés à la base de données).`;
+                    aff += `Extraction des membres du salon effectuée (${n_add} nouveaux utilisateurs ajoutés à la base de données).`;
                 }
 
                 aff += k_add ? `\nNouvelle clef **${dfltKey}** ajoutée aux messages disponibles.` : `\nAucun nouvelle clef ajoutée aux messages disponibles.`;
-                /*
-                if(k_add) {
-                    aff += `\nNouvelle clef ${dfltKey} ajoutée aux messages disponibles.`;
-                } else {
-                    aff += `\nAucun nouvelle clef ajoutée aux messages disponibles.`;
-                }*/
 
                 msg.channel.send(aff);
             });
         }
     } else {
         mID = msg.author.id;
+        //si l'utilisateur qui fait la demande est dans la base de données
         if(bot.utilisateurs[mID]) {
+            //si un message précis est demandé
             if(args[1]) {
-                if(bot.utilisateurs[mID].messages[args[1]]) {
+                //on n'envoie un message que s'il y en a un
+                if(bot.utilisateurs[mID].messages[args[1]] !== dfltTxt) {
                     msg.author.send(`Message concernant **${args[1]}** : ${bot.utilisateurs[mID].messages[args[1]]}`);
                 } else {
                     msg.author.send(`Aucun message concernant **${args[1]}** n'est à porter à votre attention.`);
                 }
-            } else {
+            } 
+            //on affiche tous les messages...
+            else {
                 for(const i in bot.utilisateurs[mID].messages) {
-                    aff += `Message concernant **${i}** : ${bot.utilisateurs[mID].messages[i]}\n`;
+                    //... mais uniquement s'il y en a
+                    if(bot.utilisateurs[mID].messages[i] !== dfltTxt) {
+                        aff += `Message concernant **${i}** : ${bot.utilisateurs[mID].messages[i]}\n`;
+                    }
+                }
+                //s'il n'y avait rien dans les messages
+                if(aff.length === 0) {
+                    aff = "Aucun message n'est à porter à votre attention.";
                 }
                 msg.author.send(aff);
             }
-            
-        } else {
+            console.log(`${bot.utilisateurs[mID].nom} / ${bot.utilisateurs[mID].alias} a effectué une demande.`); //pour debug
+        } 
+        //si l'utilisateur qui fait la demande n'est pas dans la base de données
+        else {
             msg.author.send("Aucun message n'est à porter à votre attention.");
         }
     }
