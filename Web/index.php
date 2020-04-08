@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Bot Manager</title>
     <link rel="stylesheet" href="style.css">
+    <script src="bower_components/jquery-3.4.1.min/index.js"></script>
 </head>
 <body>
     <div id="subBody">
@@ -27,7 +28,21 @@
                 <h2 class="titre">Bienvenue sur la page de modération du Bot Math.</h2>
                 <p>pour gérer ce bot, il faut bien sur quelques connaissances de bases des commandes<br>suivez ce tutoriel pour en apprendre plus !</p>
                 <p>pour commencer, un tutoriel sur les commandes<br>vous pouver retrouver une aide similaire en tapant <code>!math help</code> sur discord !</p>
-                <script src="js/dumpHelp.js"></script>
+                <div id="help"></div>
+                <script> /*ce script va picher dans le commands.json pour afficher l'aide, le "tuto" */
+                    $.getJSON("js/commands.json", function(json) {
+                        var div = document.getElementById("help");
+                        for(let i in json)
+                        {
+                            var myH2 = document.createElement('h2');
+                            var myText = document.createElement('o');
+                            myH2.textContent = i;
+                            myText.textContent = json[i].desc;
+                            div.appendChild(myH2);
+                            div.appendChild(myText);
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>
