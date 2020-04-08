@@ -7,7 +7,7 @@ sh start.sh
 ```
 >et lancez apache2:
 ```bash
-service apache2 stop
+service apache2 start
 ```
 
 >pour le stoper :
