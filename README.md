@@ -1,6 +1,22 @@
 # Bot Math Avec interface Web Management ! [version de tets]
 > Ce bot en javascript permet de stocker pour vous les contenus de cours et devoirs à faire sous forme de texte, afin que tout le monde puisse y accéder à tout moment 
 
+>pour le demarer : 
+```bash
+sh start.sh
+```
+>et lancez apache2:
+```bash
+service apache2 stop
+```
+
+>pour le stoper :
+```bash
+sh stop.sh
+```
+
+>cette version de test ne fonctionne que sur linux car necessite sh
+
 # interface Web (en test)
 >le site est centralisé, un seul server mais chaque utilisateur aura sa propre interface vu que tout le monde n'est pas dans le meme server
 
