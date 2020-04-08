@@ -1,1 +1,50 @@
-{}
+{
+    "addCours": {
+        "desc": "`Permet <br> d'ajouter un cours.\nEx : !math addCours <date> <contenu du cours>\nGardez une date simple, sans espace.\nCe cours ne serra accessible que depuis le salon ou il a été envoyé.`"
+    },
+    "addDevoir": {
+        "desc": "`Permet d'ajouter un devoir.\nEx : !math addDevoir <date> <contenu du devoir>\nGardez une date simple, sans espace.\nCe devoir ne serra accessible que depuis le salon ou il a été envoyé.`"
+    },
+    "avatar": {
+        "desc": "`Affiche ton avatar, en grand !`"
+    },
+    "delCours": {
+        "desc": "`Permet de supprimer un cours.\nEx : !math delCours <nom> (supprime le cours nommé)\nEx : !math delCours all (supprime tous les cours)`"
+    },
+    "delDevoir": {
+        "desc": "`Permet de supprimer un devoir.\nEx : !math delDevoir <nom> (supprime le devoir nommé)\nEx : !math delDevoir all (supprimer tous les devoirs)`"
+    },
+    "dumpCours": {
+        "desc": "`Permet d'afficher un ou des cours.\nEx : !math dumpCours last (affiche le dernier cours)\nEx : !math dumpCours <nom> (affiche le cours nommé)\nEx : !math dumpCours (affiche tous les cours)`"
+    },
+    "dumpDevoir": {
+        "desc": "`Pemmet d'afficher un ou des des devoirs.\nEx : !math dumpDevoir last (affiche le dernier devoir).\nEx : !math dumpDevoir <nom> (affiche le devoir nommé)\nEx : !math dumpDevoir (affiche tous les devoirs)`"
+    },
+    "editCours": {
+        "desc": "`Permet de modifier un cours existant.\nEx : !math editCours <nom> <nouveau contenu du cours>`"
+    },
+    "editDevoir": {
+        "desc": "`Permet de modifier un devoir existant.\nEx : !math editDevoir <nom> <nouveau contenu du devoir>`"
+    },
+    "help": {
+        "desc": "`Permet de demander de l'aide.`"
+    },
+    "horaires": {
+        "desc": "`Permet d'afficher / modifier les horaires de cours.\nEx : !math horaires (affiche tous les horaires)\nEx : !math horaires <jour> <nouvel horaire> (modifie l'horaire du jour nommé)`"
+    },
+    "mahihahi": {
+        "desc": "`Permet de tester si le bot est en fonctionnement.`"
+    },
+    "mute": {
+        "desc": "`Permet de réduire quelqu'un au silence.\nEx : !math mute <mention> <temps en s (optionel)>`"
+    },
+    "sendDM": {
+        "desc": "`Permet d'envoyer un message privé prévu par l'administrateur du serveur.\nEx : !math sendDM`"
+    },
+    "unmute": {
+        "desc": "`Permet de redonner la parole à quelqu'un.\nEx : !math unmute <mention>`"
+    },
+    "userinfo": {
+        "desc": "`Permet d'afficher vos inforomations.`"
+    }
+}

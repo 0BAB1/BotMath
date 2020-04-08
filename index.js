@@ -9,6 +9,8 @@ bot.cours = require("./cours/cours.json");
 bot.devoirs = require("./cours/devoirs.json");
 bot.horaires = require("./horaires.json");
 bot.utilisateurs = require("./cours/utilisateurs.json");
+bot.compileHtml = require("./Web/js/commands.json"); //juste pour pouvoir éditer facilement et ecrire dans le .json, cette partie sert uniquement a tout compiler
+//dans le .json pour ensuite être lue pour l'interface web (d'ou le nom)
 
 //=============================================================================================//
 //===========================initialisation de la collection de commandes======================//
@@ -29,6 +31,14 @@ fs.readdir("./commands/", (err, files) => { //on regarde les fichiers dasn le do
         let props = require(`./commands/${f}`); //on creer un varible de "require" pour l'élément
         console.log(`${i + 1} : chargement de => "${props.help.name}"`);
         bot.commands.set(f.split(".")[0], props); //on ajoute la commende a la collection bot.commands (on enleve le .js a la fin+)
+
+        //partie dédié a la sauvegarde des commandes pour la partie interface Web
+        bot.compileHtml[props.help.name] = {desc : props.help.desc};
+    });
+
+    //partie dédié a la sauvegarde des commandes pour la partie interface Web
+    fs.writeFile("./Web/js/commands.json", JSON.stringify(bot.compileHtml, null, 4), err =>{
+        if(err) throw err;
     });
 });
 

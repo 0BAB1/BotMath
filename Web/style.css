@@ -136,3 +136,19 @@ code
 {
     text-align: center;
 }
+
+#textContent
+{
+    margin-bottom: 50px;
+}
+
+#help
+{
+    padding-top: 25px;
+}
+
+#help p
+{
+    color: rgb(129, 129, 129);
+    margin-top: 15px;
+}
