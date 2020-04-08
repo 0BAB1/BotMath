@@ -42,7 +42,7 @@ bot.on("ready", async () => {
     //=========présence discord==========//
     //===================================//
 
-    bot.user.setActivity('math-bot-help', {type : 'WATCHING'});
+    bot.user.setActivity('de 8h à 22h', {type : 'WATCHING'});
 
     //===================================//
     //======génération lien invite=======//
