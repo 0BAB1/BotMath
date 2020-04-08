@@ -1,6 +1,14 @@
-# Bot √x² = |x|
-> Ce bot en javascript permet de stocker pour vous les contenus de cours et devoirs à faire sous forme de texte, afin que tout le monde puisse y accéder à tout moment !
+# Bot Math Avec interface Web Management ! [version de tets]
+> Ce bot en javascript permet de stocker pour vous les contenus de cours et devoirs à faire sous forme de texte, afin que tout le monde puisse y accéder à tout moment 
+
+#interface Web (en test)
+>le site est centralisé, un seul server mais chaque utilisateur aura sa propre interface vu que tout le monde n'est pas dans le meme server
 >Il sert aussi d'outil de modération et permet d'afficher les horaires de cours.
+>Les cours/devoirs a rendre (prof comme élèves) pouront etre deposer sur le site Web centralisé
+>tout sera trié en fonction du compte utilisateur
+>l'interface Web regroupe aussi une documentation sur l'utilisation du bot
+>une vue d'ensemble sur l'etat du bot dans son server (perso) sera disponible
+>un systeme de "tuteurs", si vous etes admin sur votre serv discord, tout les coptes associé a un compte discord qui n'est pas admin dans votre server discord sera sous votre "tutorat". Ils seront considérés comme vos élèves, pour eviter que des petits malins s'amuse a se faire passer comm mebres d'autres servers.
 
 # Description
 
