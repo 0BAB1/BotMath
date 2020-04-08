@@ -93,6 +93,7 @@ code
     padding-top: 50px;
     padding-bottom: 50px;
     background-color: rgb(34, 33, 39);
+    height: 100%;
 }
 
 #menu ul
@@ -124,6 +125,11 @@ code
 {
     padding: 10px;
     width: 83%; /*car le menu a une largeur de 17 %, 83+17 = 100 % donc tout le #main est occupé !*/
+    background-color: rgb(39, 39, 39);
+    border: 1px solid rgb(65, 65, 65);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
 }
 
 #content h1, h2
